@@ -34,3 +34,4 @@ router.delete('/:id', deleteDream);
 router.patch('/:id/favorite', toggleFavorite); // Toggle favorite status
 
 export default router;
+
