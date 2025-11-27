@@ -1,0 +1,39 @@
+:root {
+    --primary-color: #0d0a31;
+    --secondary-color: #898b00;
+    --primary-dark: #0b0929;
+    --text-primary: #140f3a;
+    --text-dark: #252525;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --background-color-dark: #0d0a31;
+    --background-color-light: #ffffff;
+   --font-text: "Winky Sans", sans-serif;
+   --font-title: "RocknRoll One", sans-serif;
+   font-family: var(--font-text);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.titleFont {
+    font-family: var(--font-title);
+}
+
+.red {
+    color: #ef4444;
+}
+
+.grey {
+    color: #6b7280;
+}

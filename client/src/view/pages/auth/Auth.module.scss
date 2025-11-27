@@ -1,0 +1,130 @@
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color-dark);
+  padding: 0.8rem;
+}
+
+.formWrapper {
+  background: var(--background-color-light);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  padding: 2rem 40px;
+  width: 100%;
+  max-width: 420px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.title {
+    font-family: var(--font-title);
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-left: 4px;
+}
+
+.input {
+  padding: 14px 16px;
+  font-size: 15px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  background-color: white;
+
+  &:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-dark);
+  }
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+}
+
+.button {
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  box-shadow: 0 4px 12px var(--background-color);
+
+  &:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--background-color);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+.message{
+    min-height: 2rem;
+    max-height: 2rem;
+    margin-top: 16px;
+    font-size: 14px;
+    text-align: center;
+}
+.link{
+    font-size: 14px;
+    text-align: center;
+    color: var(--text-dark);
+   .linkTo{
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
+        color: var(--primary-color);
+    }
+}
+
