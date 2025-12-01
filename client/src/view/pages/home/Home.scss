@@ -1,3 +1,5 @@
+@import '../../../styles/theme.scss';
+
 :root {
     --font-text: "Winky Sans", sans-serif;
     --font-title: "RocknRoll One", sans-serif;
@@ -12,11 +14,11 @@
 
 .home {
     min-height: 100vh;
-    padding: 20px;
+    padding: 1rem 2rem ;
     // Use bg-secondary for a page background
-    background-color: var(--bg-secondary);
-    max-width: 1200px;
+    background-color:var(--bg-primary);
     margin: 0 auto;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 
@@ -44,4 +46,30 @@
     background-color: var(--bg-primary);
 }
 
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.homeWrapper {
+    background-color: var(--bg-primary);
+      margin-top: 5rem;
+      padding: 1rem 0;
+
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+.header {
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 100;
+box-shadow: var(  --shadow-lg);
+
+}
 

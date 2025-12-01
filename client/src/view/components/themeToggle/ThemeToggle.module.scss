@@ -1,9 +1,11 @@
 // ThemeToggle.module.scss
+@import '../../../styles/theme.scss';
+
 .container {
   width: 50px;
   height: 26px;
   // Use border-color for a neutral base color
-  background-color: var(--border-color);
+  background-color: var( --bg-secondary);
   border: none;
   border-radius: 13px;
   position: relative;
@@ -12,31 +14,31 @@
 
   &:hover {
     // Use border-hover for a slightly darker hover state
-    background-color: var(--border-hover);
+    background-color: var(--primary-color);
   }
 
   &.dark {
     // Use primary-dark or a similar dark background for the dark state
-    background-color: var(--primary-dark);
+    background-color: var(--secondary-color);
 
     .slider {
       transform: translateX(24px);
-      // Slider color should contrast with dark background
-      background-color: var(--text-dark);
+      // Slider color should contrast with dark background - use bg-card (lighter) so it pops
+      background-color: var(--bg-card);
     }
   }
 }
 
 .slider {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  // Use bg-primary (white in light mode) for the slider
-  background-color: var(--bg-primary);
+  width: 18px;
+  height: 18px;
+  // Use bg-primary / bg-card for the slider so it always contrasts with the toggle background
+  background-color: var(--secondary-color);
   border-radius: 50%;
-  top: 3px;
-  left: 3px;
-  transition: transform 0.3s, background-color 0.3s;
+  top: 4px;
+  left: 4px;
+  transition: transform 0.8s, background-color 0.3s;
   // Use a shadow variable, adjust opacity as needed
   box-shadow: var(--shadow-sm);
 }

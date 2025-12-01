@@ -1,4 +1,5 @@
 import AddDream from '../addDream/AddDream';
+import SearchBar from '../searchBar/SearchBar';
 import ThemeToggle from '../themeToggle/ThemeToggle';
 import UserInfoHoverSection from '../userInfo/UserInfoHoverSection';
 import styles from './Header.module.scss';
@@ -7,10 +8,9 @@ import styles from './Header.module.scss';
 const Header = () => {
   return (
     <header className={styles.container}>
-      <div className={styles.logo}>
-        <img src="/logo.png" alt="Dreams Diary" />
-      </div>
-
+      
+      <div className={styles.logo}>DREAMER</div>
+ <div className={styles.searchBar}><SearchBar /></div>
       <div className={styles.actions}>
         <button className={styles.favoritesBtn}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -18,7 +18,7 @@ const Header = () => {
           </svg>
         </button>
 
-        <AddDream/>
+        <AddDream />
 
         <UserInfoHoverSection />
 

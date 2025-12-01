@@ -1,78 +1,127 @@
 // src/styles/theme.scss
+// פלטת צבעים לילה אפל וכוכבים:
+// #000000 - שחור מוחלט
+// #0A0A14 - שחור-לילה
+// #1A1A2E - אפור-לילה כהה מאוד
+// #4A5A8A - אינדיגו עמום וכהה
+// #B8C5E0 - כסף-כוכבים עמום
+// #F3D76B - זהב-כוכבים נוצץ ⭐
 
-:root,
-[data-theme="light"] {
-  // Primary colors
-  --primary-color: #0d0a31;
-  --secondary-color: #898b00;
-  --primary-dark: #0b0929;
+:root, [data-theme="light"] {
+  // 1. Primary Colors
+  --primary-color: #202035; // אפור-לילה כהה כצבע ראשי
+  --secondary-color: #F3D76B; // זהב-כוכבים נוצץ כצבע משני ⭐
+  --primary-dark: #0A0A14; // שחור-לילה
+  --primary-light: #B8C5E0; // כסף-כוכבים עמום
+  --primary-hover: #f3d86b62; // ריחוף בזהב-כוכבים ⭐
 
-  // Text colors
-  --text-primary: #140f3a;
-  --text-secondary: #6b7280;
-  --text-dark: #252525;
-  --text-light: #9ca3af;
+  // 2. Text Colors
+  --text-primary: #000000; // שחור מוחלט לטקסט עיקרי
+  --text-secondary: #0A0A14; // שחור-לילה לטקסט משני
+  --text-on-primary: #B8C5E0; // טקסט על רקע כהה
+  --text-on-secondary: #000000; // טקסט על רקע זהב
 
-  // Background colors
-  --bg-primary: #ffffff;
-  --bg-secondary: #f9fafb;
-  --bg-card: #ffffff;
+  // 3. Background Colors
+  --bg-primary: #7d8cac; // הרקע הראשי הוא הבהיר ביותר
+  --bg-secondary: #1A1A2E; // רקע משני (אפור-לילה כהה)
+  --bg-card: #FFFFFF; // לבן נקי לקלפים
 
-  // Border colors
-  --border-color: #e5e7eb;
-  --border-hover: #d1d5db;
+  // 4. Border & Divider Colors
+  --border-color: rgba(26, 26, 46, 0.15); // #1A1A2E עם שקיפות
+  --border-hover: rgb(243, 216, 107); // זהב-כוכבים בריחוף ⭐
+  --divider-color: rgba(0, 0, 0, 0.05);
 
-  // Accent colors (dreamy purples/blues)
-  --accent-purple: #6366f1;
-  --accent-blue: #3b82f6;
-  --accent-pink: #ec4899;
-  --accent-light: #f3f4f6;
+  // 5. Status Colors
+  --success: #F3D76B; // זהב-כוכבים כהצלחה ⭐
+  --error: #1A1A2E; // כהה מאוד כשגיאה
+  --warning: #F3D76B; // זהב-כוכבים כאזהרה ⭐
 
-  // Status colors
-  --success: #10b981;
-  --error: #ef4444;
-  --warning: #f59e0b;
+  // 6. Shadows
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.548);
 
-  // Shadows
-  --shadow-sm: 0 1px 3px rgba(13, 10, 49, 0.1);
-  --shadow-md: 0 4px 6px rgba(13, 10, 49, 0.1);
-  --shadow-lg: 0 10px 25px rgba(13, 10, 49, 0.15);
+  // 7. Star Accents (נגיעות כוכבים)
+  --star-glow: #F3D76B; // זהב-כוכבים נוצץ ⭐
+  --star-shimmer: rgba(243, 215, 107, 0.3); // זוהר כוכבים
 }
 
 [data-theme="dark"] {
-  // Primary colors
-  --primary-color: #1a1640;
-  --secondary-color: #b8ba00;
-  --primary-dark: #0d0a31;
+  // 1. Primary Colors
+  --primary-color: #1A1A2E; // אפור-לילה כהה כצבע ראשי
+  --secondary-color: #F3D76B; // זהב-כוכבים נוצץ ⭐
+  --primary-dark: #000000; // שחור מוחלט
+  --primary-light: #B8C5E0; // כסף-כוכבים עמום
+  --primary-hover: #f3d86b62; // ריחוף בזהב-כוכבים ⭐
 
-  // Text colors
-  --text-primary: #e5e7eb;
-  --text-secondary: #9ca3af;
-  --text-dark: #f9fafb;
-  --text-light: #6b7280;
+  // 2. Text Colors
+  --text-primary: #B8C5E0; // כסף-כוכבים עמום לטקסט עיקרי
+  --text-secondary: #f3d96f8c; // זהב-כוכבים לטקסט משני ⭐
+  --text-on-primary: #B8C5E0; // טקסט על רקע ראשי
+  --text-on-secondary: #000000; // טקסט על רקע זהב
 
-  // Background colors
-  --bg-primary: #0d0a31;
-  --bg-secondary: #140f3a;
-  --bg-card: #1a1640;
+  // 3. Background Colors
+  --bg-primary: #000000; // הרקע הראשי - שחור מוחלט
+  --bg-secondary: #0A0A14; // רקע משני - שחור-לילה
+  --bg-card: #0A0A14; // קלפים בשחור-לילה
 
-  // Border colors
-  --border-color: #2d2555;
-  --border-hover: #3d3565;
+  // 4. Border & Divider Colors
+  --border-color: #1A1A2E; // קו הפרדה כהה
+  --border-hover: #f3d86bc5; // ריחוף בזהב-כוכבים ⭐
+  --divider-color: rgba(26, 26, 46, 0.5);
 
-  // Accent colors (brighter for dark mode)
-  --accent-purple: #818cf8;
-  --accent-blue: #60a5fa;
-  --accent-pink: #f472b6;
-  --accent-light: #1e1b4b;
+  // 5. Status Colors
+  --success: #F3D76B; // זהב-כוכבים כהצלחה ⭐
+  --error: #1A1A2E; // כהה מאוד כשגיאה
+  --warning: #F3D76B; // זהב-כוכבים כאזהרה ⭐
 
-  // Status colors
-  --success: #34d399;
-  --error: #f87171;
-  --warning: #fbbf24;
+  // 6. Shadows (הצללות עמוקות וכבדות)
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.75);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.9);
 
-  // Shadows
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.6);
+  // 7. Star Accents (נגיעות כוכבים מנצנצות)
+  --star-glow: #F3D76B; // זהב-כוכבים נוצץ ⭐
+  --star-shimmer: rgba(243, 215, 107, 0.4); // זוהר כוכבים חזק יותר בחושך
 }
+
+// דוגמאות שימוש בכוכבים:
+//
+// .button-star {
+//   background: var(--primary-color);
+//   color: var(--star-glow);
+//   box-shadow: 0 0 10px var(--star-shimmer);
+//
+//   &:hover {
+//     border-color: var(--star-glow);
+//     box-shadow: 0 0 20px var(--star-shimmer);
+//   }
+// }
+//
+// .text-star {
+//   color: var(--star-glow);
+//   text-shadow: 0 0 8px var(--star-shimmer);
+// }
+
+//       --primary-color
+//       --secondary-color
+//       --primary-dark
+//       --primary-light
+//       --text-primary
+//       --text-secondary
+//       --text-on-primary
+//       --text-on-secondary
+//       --bg-primary
+//       --bg-secondary
+//       --bg-card
+//       --border-color
+//       --border-hover
+//       --divider-color
+//       --success
+//       --error
+//       --warning
+//       --shadow-sm
+//       --shadow-md
+//       --shadow-lg
+//       --star-glow ⭐ (חדש!)
+//       --star-shimmer ⭐ (חדש!)

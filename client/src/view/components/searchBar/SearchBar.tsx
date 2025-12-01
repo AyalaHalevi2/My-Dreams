@@ -6,10 +6,6 @@ export default function SearchBar() {
 
   return (
     <div className={styles.container}>
-      <svg className={styles.searchIcon} width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-        <circle cx="8" cy="8" r="6" strokeWidth="2" />
-        <path d="M13 13l5 5" strokeWidth="2" />
-      </svg>
 
       <input
         type="text"
@@ -18,6 +14,12 @@ export default function SearchBar() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+      <div className={styles.searchIcon}><svg  width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+        <circle cx="8" cy="8" r="6" strokeWidth="2" />
+        <path d="M13 13l5 5" strokeWidth="2" />
+      </svg></div>
+
+
     </div>
   );
 }

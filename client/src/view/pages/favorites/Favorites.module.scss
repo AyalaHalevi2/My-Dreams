@@ -1,0 +1,19 @@
+.container {
+    min-height: 80vh;
+    padding: 20px;
+    background-color: var(--bg-primary);
+}
+
+.favoritesList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.emptyState {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+}

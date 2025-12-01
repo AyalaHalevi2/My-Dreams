@@ -5,8 +5,8 @@ import Home from './view/pages/home/Home.tsx'
 import Login from './view/pages/auth/Login.tsx'
 import Register from './view/pages/auth/Register.tsx'
 import Favorites from './view/pages/favorites/Favorites.tsx'
-import { ThemeProvider } from './view/model/theme/ThemeProvider.tsx'
-import { LoginProvider } from './view/model/isLoggedin/LoginProvider.tsx'
+import { ThemeProvider } from './model/theme/ThemeProvider.tsx'
+import { LoginProvider } from './model/isLoggedin/LoginProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -14,18 +14,8 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <LoginProvider>
           <Routes>
-            <Route
-              path='/'
-              element={
-                  <Home />
-              }
-            />
-            <Route
-              path='/favorites'
-              element={
-                  <Favorites />
-              }
-            />
+            <Route path='/' element={<Home />} />
+            <Route path='/favorites' element={<Favorites />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
           </Routes>

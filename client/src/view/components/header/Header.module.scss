@@ -1,22 +1,24 @@
 // Header.module.scss
+@import '../../../styles/theme.scss';
+
 .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 1rem 3rem;
+  width: 100%;
   // Use bg-card for the header background
   background-color: var(--bg-card);
-  border-radius: 12px;
-  margin-bottom: 20px;
   // Use a small shadow variable
   box-shadow: var(--shadow-sm);
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 2.5rem;
   font-weight: bold;
   // Use primary-color for the logo text if it's text-based
-  color: var(--primary-color);
+  color: var(--star-glow);
+  font-family: var( --font-title);
+  flex: 1;
 
   img {
     height: 40px;
@@ -26,7 +28,9 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 15px;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  flex: 1;
 }
 
 .favoritesBtn {
@@ -42,12 +46,20 @@
   transition: color 0.2s;
 
   &:hover {
-    // Use error/accent-pink for a "favorites" style hover
-    color: var(--accent-pink);
+    // Use the secondary color for a favorites hover to keep a friendly accent
+    color: var(  --border-hover);
   }
 
   svg {
     width: 24px;
     height: 24px;
   }
+}
+.searchBar {
+
+  padding: 0 20px;
+  flex: 3;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }

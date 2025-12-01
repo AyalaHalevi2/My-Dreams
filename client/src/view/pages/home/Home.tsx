@@ -1,22 +1,22 @@
 //import { useState } from 'react'
 import './Home.scss'
+import '../../../styles/theme.scss';
+
 import { useContext } from 'react';
 import DreamsList from '../../components/dreamsList/DreamsList';
 import Header from '../../components/header/Header';
-import SearchBar from '../../components/searchBar/SearchBar';
 
-import { ThemeContext } from '../../model/theme/ThemeProvider';
+import { ThemeContext } from '../../../model/theme/ThemeProvider';
 
 export const PATH = 'http://localhost:3004';
 
 function Home() {
     const theme = useContext(ThemeContext)
     return (
-        <div data-theme={theme ? 'dark' : 'light'}>
-            <div className={'u'}>
-                <Header />
-                <SearchBar />
-                <DreamsList />
+        <div className='homeWrapper' data-theme={theme.theme === 'dark' ? 'dark' : 'light'}>
+            <div className="header"> <Header /></div>
+            <div className={'home'}>
+                <div className="dreamsList"><DreamsList /></div>
             </div >
         </div>
     )

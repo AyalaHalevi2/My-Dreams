@@ -1,4 +1,6 @@
 // UserInfoHoverSection.module.scss
+@import '../../../styles/theme.scss';
+
 .container {
   position: relative;
 }
@@ -16,8 +18,8 @@
   transition: color 0.2s;
 
   &:hover {
-    // Use accent-purple for a distinct hover effect
-    color: var(--accent-purple);
+    // Use primary-color for a distinct hover effect
+    color: var(  --border-hover);
   }
 
   svg {
@@ -28,8 +30,8 @@
 
 .dropdown {
   position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
+  top: calc(100% + 0.3rem );
+  right: -2.5rem;
   // Use bg-card for the background
   background-color: var(--bg-card);
   // Use border-color for the border
@@ -46,8 +48,8 @@
   padding: 12px 16px;
   font-size: 12px;
   font-weight: 600;
-  // Use text-light for subtle header text
-  color: var(--text-light);
+  // Use text-secondary for subtle header text
+  color: var(--text-secondary);
   text-transform: uppercase;
   // Use border-color for the separator
   border-bottom: 1px solid var(--border-color);
@@ -68,10 +70,17 @@
   &:hover {
     // Use bg-secondary for a subtle hover background
     background-color: var(--bg-secondary);
+    color: var(  --primary-hover);
+    transform: scale(1.02);
   }
 
   &:not(:last-child) {
     // Use border-color for the separator
     border-bottom: 1px solid var(--border-color);
   }
+}
+.logout {
+  // Use secondary-color for logout text to make it stand out
+  color: var(--secondary-color);
+
 }

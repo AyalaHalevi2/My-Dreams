@@ -1,9 +1,10 @@
 // AddDreamBtn.module.scss
+@import '../../../styles/theme.scss';
 .container {
   width: 40px;
   height: 40px;
-  // Use accent-purple for the button background
-  background-color: var(--accent-purple);
+  // Use primary-color for the button background
+  background-color: var(--primary-color);
   border: none;
   border-radius: 8px;
   display: flex;
@@ -11,11 +12,13 @@
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
-  color: #ffffff;
+  color: var(--text-on-primary);
 
   &:hover {
     // Use a slightly darker primary-dark color for hover
     background-color: var(--primary-dark);
+        color: var(  --primary-hover);
+
     transform: scale(1.05);
   }
 

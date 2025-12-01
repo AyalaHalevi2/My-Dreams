@@ -1,26 +1,42 @@
 // SearchBar.module.scss
+@import '../../../styles/theme.scss';
+
 .container {
-  position: relative;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;;
+  padding:0.7rem 1.5rem;
+  width: 100%;
+// Use primary-color for the focus border
+    border-color: var(--primary-color);
+    // Use a subtle focus shadow using primary color-derived rgba
+     border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+    &:focus-within {
+    box-shadow: 0 0 0 3px rgba(47, 78, 154, 0.12);
+  }
 }
 
 .searchIcon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  // Use text-light for the icon
-  color: var(--text-light);
-  pointer-events: none;
+
+  // Use text-secondary for the icon
+  color: var(--text-secondary);
+
+
+  cursor: pointer;
+  &:hover {
+    color: var(--text-primary);
+  }
 }
 
 .input {
+      outline: none;
+
   width: 100%;
-  padding: 14px 45px;
+  ;
   font-size: 16px;
   // Use border-color for the border
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border: none;
   // Use bg-card for the background
   background-color: var(--bg-card);
   // Use text-primary for input text color
@@ -29,14 +45,12 @@
 
   &:focus {
     outline: none;
-    // Use accent-purple for the focus border
-    border-color: var(--accent-purple);
-    // Use accent-purple with a manual low opacity for the subtle shadow
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    border-color: var(--primary-color);
+
   }
 
   &::placeholder {
-    // Use text-light for the placeholder
-    color: var(--text-light);
+    // Use text-secondary for the placeholder
+    color: var(--text-secondary);
   }
 }

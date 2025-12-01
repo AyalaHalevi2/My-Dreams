@@ -1,0 +1,23 @@
+@import '../../../styles/theme.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.meta {
+    font-size: 13px;
+    color: var(--text-secondary);
+}

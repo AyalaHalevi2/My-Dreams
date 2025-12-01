@@ -1,15 +1,19 @@
 import styles from './ThemeToggle.module.scss';
-import { useState } from 'react';
+
+import { ThemeContext } from '../../../model/theme/ThemeProvider';
+import { useContext } from 'react';
 const ThemeToggle = () => {
 //iport context or state to manage theme
-  const [isDark, setIsDark] = useState(false); // Example state
+  const { theme, handleToggleTheme } = useContext(ThemeContext); // Example state
   return (
     <button
-      className={`${styles.container} ${isDark ? styles.dark : ''}`}
-      onClick={() => setIsDark(!isDark)}
+      className={`${styles.container} ${theme==='dark'?styles.dark : ''}`}
+      onClick={handleToggleTheme}
       aria-label="Toggle theme"
     >
-      <div className={styles.slider}></div>
+      <div className={styles.slider}>
+        
+      </div>
     </button>
   );
 }

@@ -1,4 +1,5 @@
-// DreamsList.module.scss
+@import '../../../styles/theme.scss';
+
 .container {
   // Use bg-card for the list container background
   background-color: var(--bg-card);
@@ -36,20 +37,20 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  // Use bg-secondary for the button background
+  // Use bg-secondary for the button background (contrast with text-on-secondary)
   background-color: var(--bg-secondary);
   // Use border-color for the button border
   border: 1px solid var(--border-color);
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  // Use text-primary for the button text
-  color: var(--text-primary);
+  // Use text-on-secondary when background is secondary
+  color: var(--text-on-secondary);
   transition: background-color 0.2s, border-color 0.2s;
 
   &:hover {
-    // Use accent-light for a light hover background
-    background-color: var(--accent-light);
+    // Use primary-light for a light hover background
+    background-color: var(--primary-light);
     // Use border-hover for a slightly darker border on hover
     border-color: var(--border-hover);
   }
@@ -83,13 +84,13 @@
     cursor: pointer;
     border-radius: 6px;
     font-size: 14px;
-    // Use text-primary for the menu item text
-    color: var(--text-primary);
+    // Use text-on-secondary when menu sits on secondary background, otherwise text-primary
+    color: var(--text-on-secondary);
     transition: background-color 0.2s;
 
     &:hover {
-      // Use accent-light for hover background
-      background-color: var(--accent-light);
+      // Use primary-light for hover background
+      background-color: var(--primary-light);
     }
   }
 }
@@ -103,8 +104,8 @@
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  // Use text-light for subtle empty state text
-  color: var(--text-light);
+  // Use text-secondary for subtle empty state text
+  color: var(--text-secondary);
   font-size: 16px;
 }
 
