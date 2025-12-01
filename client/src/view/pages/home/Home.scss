@@ -1,16 +1,7 @@
 :root {
-    --primary-color: #0d0a31;
-    --secondary-color: #898b00;
-    --primary-dark: #0b0929;
-    --text-primary: #140f3a;
-    --text-dark: #252525;
-    --text-secondary: #6b7280;
-    --border-color: #e5e7eb;
-    --background-color-dark: #0d0a31;
-    --background-color-light: #ffffff;
-   --font-text: "Winky Sans", sans-serif;
-   --font-title: "RocknRoll One", sans-serif;
-   font-family: var(--font-text);
+    --font-text: "Winky Sans", sans-serif;
+    --font-title: "RocknRoll One", sans-serif;
+    font-family: var(--font-text);
 }
 
 * {
@@ -18,12 +9,14 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 .home {
-  min-height: 100vh;
-  padding: 20px;
-  background-color: #f5f5f5;
-  max-width: 1200px;
-  margin: 0 auto;
+    min-height: 100vh;
+    padding: 20px;
+    // Use bg-secondary for a page background
+    background-color: var(--bg-secondary);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 
@@ -32,20 +25,23 @@
 }
 
 .red {
-    color: #ef4444;
+    // Use the error status color
+    color: var(--error);
 }
 
 .grey {
-    color: #6b7280;
+    // Use the text-secondary color
+    color: var(--text-secondary);
 }
 
+// These classes should use theme variables for more consistency
 .light{
-    color: #040c1a;
-    background-color: #6b7280;
-
+    color: var(--primary-color);
+    background-color: var(--bg-secondary);
 }
 .dark{
-    color: #afa3a3;
-    background-color: #140f3a;
-
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
 }
+
+

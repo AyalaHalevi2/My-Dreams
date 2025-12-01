@@ -4,15 +4,19 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background-color: #ffffff;
+  // Use bg-card for the header background
+  background-color: var(--bg-card);
   border-radius: 12px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  // Use a small shadow variable
+  box-shadow: var(--shadow-sm);
 }
 
 .logo {
   font-size: 24px;
   font-weight: bold;
+  // Use primary-color for the logo text if it's text-based
+  color: var(--primary-color);
 
   img {
     height: 40px;
@@ -33,11 +37,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #333;
+  // Use text-primary for the default icon color
+  color: var(--text-primary);
   transition: color 0.2s;
 
   &:hover {
-    color: #ff6b6b;
+    // Use error/accent-pink for a "favorites" style hover
+    color: var(--accent-pink);
   }
 
   svg {

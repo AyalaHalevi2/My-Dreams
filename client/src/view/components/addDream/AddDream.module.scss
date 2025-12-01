@@ -1,9 +1,9 @@
-
 // AddDreamBtn.module.scss
 .container {
   width: 40px;
   height: 40px;
-  background-color: #6c5ce7;
+  // Use accent-purple for the button background
+  background-color: var(--accent-purple);
   border: none;
   border-radius: 8px;
   display: flex;
@@ -14,7 +14,8 @@
   color: #ffffff;
 
   &:hover {
-    background-color: #5f4dd3;
+    // Use a slightly darker primary-dark color for hover
+    background-color: var(--primary-dark);
     transform: scale(1.05);
   }
 

@@ -12,11 +12,13 @@ export const PATH = 'http://localhost:3004';
 function Home() {
     const theme = useContext(ThemeContext)
     return (
-        <div className= {`home, ${theme}`}>
-            <Header />
-            <SearchBar />
-            <DreamsList />
-        </div >
+        <div data-theme={theme ? 'dark' : 'light'}>
+            <div className={'u'}>
+                <Header />
+                <SearchBar />
+                <DreamsList />
+            </div >
+        </div>
     )
 }
 

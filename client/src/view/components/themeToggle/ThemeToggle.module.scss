@@ -2,7 +2,8 @@
 .container {
   width: 50px;
   height: 26px;
-  background-color: #e0e0e0;
+  // Use border-color for a neutral base color
+  background-color: var(--border-color);
   border: none;
   border-radius: 13px;
   position: relative;
@@ -10,15 +11,18 @@
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #d0d0d0;
+    // Use border-hover for a slightly darker hover state
+    background-color: var(--border-hover);
   }
 
   &.dark {
-    background-color: #4a4a4a;
+    // Use primary-dark or a similar dark background for the dark state
+    background-color: var(--primary-dark);
 
     .slider {
       transform: translateX(24px);
-      background-color: #1a1a1a;
+      // Slider color should contrast with dark background
+      background-color: var(--text-dark);
     }
   }
 }
@@ -27,10 +31,12 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  background-color: #ffffff;
+  // Use bg-primary (white in light mode) for the slider
+  background-color: var(--bg-primary);
   border-radius: 50%;
   top: 3px;
   left: 3px;
   transition: transform 0.3s, background-color 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  // Use a shadow variable, adjust opacity as needed
+  box-shadow: var(--shadow-sm);
 }
