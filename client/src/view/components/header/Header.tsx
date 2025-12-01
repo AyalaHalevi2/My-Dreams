@@ -1,7 +1,8 @@
+import AddDream from '../addDream/AddDream';
+import ThemeToggle from '../themeToggle/ThemeToggle';
+import UserInfoHoverSection from '../userInfo/UserInfoHoverSection';
 import styles from './Header.module.scss';
-import ThemeToggle from './ThemeToggle';
-import AddDreamBtn from './AddDreamBtn';
-import UserInfoHoverSection from './UserInfoHoverSection';
+
 
 const Header = () => {
   return (
@@ -17,7 +18,7 @@ const Header = () => {
           </svg>
         </button>
 
-        <AddDreamBtn />
+        <AddDream/>
 
         <UserInfoHoverSection />
 

@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './Auth.module.scss'
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import { PATH } from '../home/Home';
+import { LoginContext } from '../../model/isLoggedin/LoginProvider';
 const Register = () => {
   const [message, setMessage] = useState<string>('');
   const [isOK, setIsOK] = useState<"red" | "grey" | "">("");
-  const navigate = useNavigate();
+  const { handleLogin } = useContext(LoginContext)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -41,8 +42,7 @@ const Register = () => {
       setMessage('Registration successful');
       setIsOK("");
       setTimeout(() => {
-
-        navigate('/');
+        handleLogin()
       }, 1500);
 
 

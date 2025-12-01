@@ -6,8 +6,7 @@ const DreamsList = () => {
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Dreams data would come from props or state management
-  const dreams = [];
-
+  const dreams = [{ id: 1 }, { id: 2 }]; // Example dream items
   return (
     <div className={styles.container}>
       <div className={styles.header}>

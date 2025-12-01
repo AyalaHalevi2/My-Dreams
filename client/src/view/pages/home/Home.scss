@@ -25,12 +25,7 @@
   max-width: 1200px;
   margin: 0 auto;
 }
-.home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
+
 
 .titleFont {
     font-family: var(--font-title);
@@ -42,4 +37,15 @@
 
 .grey {
     color: #6b7280;
+}
+
+.light{
+    color: #040c1a;
+    background-color: #6b7280;
+
+}
+.dark{
+    color: #afa3a3;
+    background-color: #140f3a;
+
 }

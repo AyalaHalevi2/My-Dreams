@@ -1,4 +1,4 @@
-import styles from './AddDreamBtn.module.scss';
+import styles from './AddDream.module.scss';
 
 const AddDream = () => {
   const handleAddDream = () => {

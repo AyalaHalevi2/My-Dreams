@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './Auth.module.scss'
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import { PATH } from '../home/Home';
+import { LoginContext } from '../../model/isLoggedin/LoginProvider';
 
 const Login = () => {
   const [message, setMessage] = useState<string>('');
   const [isOK, setIsOK] = useState<"red" | "grey" | "">("");
-  const navigate = useNavigate();
+  const { handleLogin } = useContext(LoginContext)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -42,8 +43,10 @@ const Login = () => {
       setIsOK("");
       setTimeout(() => {
 
-        navigate('/');
-      }, 1500);
+        console.log('log');
+
+        handleLogin()
+     }, 1500);
 
 
     } catch (error: any) {
@@ -85,7 +88,7 @@ const Login = () => {
         <div className={styles.link}>
           Don't have an account? <Link to="/register" className={styles.linkTo}>Register here</Link>
         </div>
-        </div>
+      </div>
     </div>
   )
 }
