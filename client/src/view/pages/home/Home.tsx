@@ -7,7 +7,18 @@ import DreamsList from '../../components/dreamsList/DreamsList';
 import Header from '../../components/header/Header';
 
 import { ThemeContext } from '../../../model/theme/ThemeProvider';
-
+export interface Dream{
+    userId: string;
+    title: string;
+    content: string;
+    date: Date;
+    clarity: number;
+    mood?: 'happy' | 'sad' | 'scared' | 'confused' | 'peaceful' | 'anxious' | 'excited' | 'neutral';
+    tags?: string[];
+    isFavorite: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
 export const PATH = 'http://localhost:3004';
 
 function Home() {

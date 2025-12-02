@@ -3,12 +3,10 @@ import styles from './Auth.module.scss'
 import { Link } from 'react-router';
 import { PATH } from '../home/Home';
 import { LoginContext } from '../../../model/isLoggedin/LoginProvider';
-import { ThemeContext } from '../../../model/theme/ThemeProvider';
 const Login = () => {
   const [message, setMessage] = useState<string>('');
   const [isOK, setIsOK] = useState<"red" | "grey" | "">("");
   const { handleLogin } = useContext(LoginContext)
-    const theme = useContext(ThemeContext)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -47,7 +45,7 @@ const Login = () => {
         console.log('log');
 
         handleLogin()
-     }, 600);
+      }, 600);
 
 
     } catch (error: any) {
@@ -55,7 +53,7 @@ const Login = () => {
     }
   };
   return (
-    <div className={styles.container }  data-theme={theme ? 'dark' : 'light'}>
+    <div className={styles.container}  >
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>Welcome Back</h1>
         <p className={styles.subtitle}>Enter your credentials to access your account</p>

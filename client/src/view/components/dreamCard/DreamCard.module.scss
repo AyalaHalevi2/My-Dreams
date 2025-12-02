@@ -1,23 +1,97 @@
-@import '../../../styles/theme.scss';
 
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: var(--shadow-sm);
+.dreamCard {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
 }
 
-.title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-primary);
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
 }
 
-.meta {
-    font-size: 13px;
-    color: var(--text-secondary);
+.dreamTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.favoriteBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: var(--star-glow);
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px var(--star-shimmer));
+  }
+}
+
+.dreamContent {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dreamMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.dreamDate {
+  color: var(--text-secondary);
+}
+
+.moodBadge {
+  padding: 0.25rem 0.75rem;
+  background: var(--primary-hover);
+  color: var(--secondary-color);
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.clarityRating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.clarityLabel {
+  color: var(--text-secondary);
+}
+
+.starFilled {
+  color: var(--star-glow);
+}
+
+.starEmpty {
+  color: var(--text-secondary);
+  opacity: 0.3;
 }
