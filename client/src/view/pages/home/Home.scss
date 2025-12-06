@@ -4,6 +4,7 @@
     --font-text: "Winky Sans", sans-serif;
     --font-title: "RocknRoll One", sans-serif;
     font-family: var(--font-text);
+    
 }
 
 * {
@@ -14,9 +15,9 @@
 
 .home {
     min-height: 100vh;
-    padding: 1rem 2rem ;
+    padding: 1rem 2rem;
     // Use bg-secondary for a page background
-    background-color:var(--bg-primary);
+    background-color: var(--bg-primary);
     margin: 0 auto;
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -37,39 +38,42 @@
 }
 
 // These classes should use theme variables for more consistency
-.light{
+.light {
     color: var(--primary-color);
     background-color: var(--bg-secondary);
 }
-.dark{
+
+.dark {
     color: var(--text-primary);
     background-color: var(--bg-primary);
 }
 
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
 .homeWrapper {
     background-color: var(--bg-primary);
-      margin-top: 5rem;
-      padding: 1rem 0;
+    margin-top: 5rem;
+    padding: 1rem 0;
 
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
 }
+
 .header {
-position: fixed;
-width: 100%;
-top: 0;
-z-index: 100;
-box-shadow: var(  --shadow-lg);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-lg);
 
 }
-

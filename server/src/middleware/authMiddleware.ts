@@ -51,19 +51,19 @@ export const authenticate = async (req: AuthRequest, res: Response, next: NextFu
             });
             return;
         }
-         if (error.name === 'JsonWebTokenError') {
+        if (error.name === 'JsonWebTokenError') {
             res.status(401).json({
                 success: false,
                 message: 'Invalid token. Please log in again.'
             });
             return;
         }
-    }
 
-    // 500 Internal Server Error for other issues
-    res.status(500).json({
-        success: false,
-        message: 'Authentication failed: Internal error.'
-    });
+        // 500 Internal Server Error for other issues
+        res.status(500).json({
+            success: false,
+            message: 'Authentication failed: Internal error.'
+        });
+    }
 }
 

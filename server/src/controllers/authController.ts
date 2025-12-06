@@ -163,17 +163,18 @@ export const getMe = async (req: AuthRequest, res: Response): Promise<void> => {
  */
 export const logout = async (_req: Request, res: Response): Promise<void> => {
   try {
-    res.cookie('token', 'none', {
-      expires: new Date(Date.now() + 10 * 1000), // expire in 10 seconds
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict' as const,
-    });
-
-    res.status(200).json({
-      success: true,
-      message: 'Logged out successfully'
-    });
+    res
+      .status(200)
+      .cookie('token', 'none', {
+        expires: new Date(Date.now() + 10 * 1000), // expire in 10 seconds
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict' as const,
+      })
+      .json({
+        success: true,
+        message: 'Logged out successfully'
+      });
   } catch (error: any) {
     console.error('Logout Error:', error);
     res.status(500).json({ success: false, message: 'Failed to log out' });

@@ -1,12 +1,134 @@
 @import '../../../styles/theme.scss';
 
 .container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+}
+
+.dreamsListContainer {
   // Use bg-card for the list container background
   background-color: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   // Use a small shadow variable
   box-shadow: var(--shadow-sm);
+  flex: 8;
+}
+
+.filter {
+  &Container {
+    flex: 1;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    // Use a small shadow variable
+    box-shadow: var(--shadow-sm);
+  }
+
+  &Header {
+    font-size: 20px;
+    font-weight: 600;
+    // Use text-primary for the title
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
+
+  }
+
+  &Title {
+    font-size: 18px;
+    font-weight: 500;
+    // Use text-primary for the title
+    color: var(--text-secondary);
+    margin: 1rem 0;
+
+  }
+
+  &Options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: var(--text-primary);
+
+    .checkboxLabel {
+      display: inline-block;
+      cursor: pointer;
+
+      input.checkbox {
+        display: none; // Hide the default checkbox
+      }
+
+      .checkboxText {
+        display: inline-block;
+        padding: 0.25rem 0.75rem; // px-3 py-1
+        border-radius: 9999px; // rounded-full
+        font-size: 0.875rem; // text-sm
+        transition: all 0.3s ease;
+        background-color: var(--bg-primary); // bg-gray-100
+        color: #374151; // text-gray-700
+
+        &:hover {
+          background-color: #e5e7eb; // hover:bg-gray-200
+        }
+      }
+
+      input.checkbox:checked+.checkboxText {
+        background-color: var(--secondary-color); // bg-purple-500
+        color: var(--primary-dark)
+      }
+    }
+
+  }
+
+}
+
+.buttonAll {
+  padding: 6px 12px;
+  background-color: var(--error);
+  color: var(--text-on-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    color: var(--text-on-secondary);
+    background-color: var(--primary-light);
+  }
+}
+
+.sort {
+  &Button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    // Use bg-secondary for the button background (contrast with text-on-secondary)
+    background-color: var(--bg-secondary);
+    // Use border-color for the button border
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    // Use text-on-secondary when background is secondary
+    color: var(--text-on-primary);
+    transition: background-color 0.2s, border-color 0.2s;
+
+    &:hover {
+      // Use primary-light for a light hover background
+      background-color: var(--primary-light);
+      // Use border-hover for a slightly darker border on hover
+      color: var(--text-on-secondary);
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      // Ensure the icon color matches the text or is primary color
+      color: var(--primary-color);
+    }
+  }
 }
 
 .header {
@@ -63,37 +185,7 @@
   }
 }
 
-.sortMenu,
-.filtersMenu {
-  // Use bg-secondary for the menu background
-  background-color: var(--bg-secondary);
-  // Use border-color for the border
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
 
-  button {
-    padding: 10px 12px;
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    border-radius: 6px;
-    font-size: 14px;
-    // Use text-on-secondary when menu sits on secondary background, otherwise text-primary
-    color: var(--text-on-secondary);
-    transition: background-color 0.2s;
-
-    &:hover {
-      // Use primary-light for hover background
-      background-color: var(--primary-light);
-    }
-  }
-}
 
 .dreamsList {
   min-height: 300px;

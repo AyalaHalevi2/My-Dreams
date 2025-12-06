@@ -13,6 +13,8 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     });
     const handleToggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    console.log("theme", theme);
+
     }
 
   useEffect(() => {
