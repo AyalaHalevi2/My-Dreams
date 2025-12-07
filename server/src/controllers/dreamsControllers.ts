@@ -82,12 +82,14 @@ export const createDream = async (req: AuthRequest, res: Response): Promise<void
 
     if (!userId) {
       res.status(401).json({ success: false, message: 'User not authenticated' });
-      return;
+      throw new Error('User not authenticated');
+      
     }
 
     if (!title || !content) {
       res.status(400).json({ success: false, message: 'Title and content are required' });
-      return;
+      throw new Error('Title and content are required');
+
     }
 
     const newDream = await Dream.create({

@@ -15,7 +15,7 @@ button{
   /* מבטיח שהכפתור מוכן לטרנספורמציות */
   transform: translateY(0);
 &:hover {
-  color: var(--text-on-secondary);
+  color: var(--primary-dark);
   background-color: var(--primary-light);
   /* מעלה את הכפתור ב-2 פיקסלים כלפי מעלה */
   transform: translateY(-2px);

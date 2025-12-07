@@ -27,7 +27,7 @@ const sendTokenResponse = (user: IUser, statusCode: number, res: Response) => {
     throw new Error('JWT_SECRET is not defined');
   }
 
-  const token =jwt.sign(payload, JWT_SECRET as jwt.Secret, {
+  const token = jwt.sign(payload, JWT_SECRET as jwt.Secret, {
     expiresIn: JWT_EXPIRE as jwt.SignOptions['expiresIn'],
   });
 
@@ -35,8 +35,11 @@ const sendTokenResponse = (user: IUser, statusCode: number, res: Response) => {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict' as const
+    sameSite: 'lax' as const
   };
+
+  console.log('🍪 Setting cookie with options:', cookieOptions);
+  console.log('🍪 Token:', token);
 
   res.status(statusCode).cookie('token', token, cookieOptions).json({
     success: true,
@@ -169,7 +172,7 @@ export const logout = async (_req: Request, res: Response): Promise<void> => {
         expires: new Date(Date.now() + 10 * 1000), // expire in 10 seconds
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict' as const,
+        sameSite: 'lax' as const,
       })
       .json({
         success: true,

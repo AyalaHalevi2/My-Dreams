@@ -1,52 +1,78 @@
 import React, { createContext, useEffect, useState } from "react"
 import { useNavigate, useLocation } from "react-router"
-const experationName = "login_expiration"
+import { PATH } from "../Types"
+
 const LoginContext = createContext({
     isLoggedIn: true,
     handleLogin: () => { },
     handleLogout: () => { }
 })
+
 const LoginProvider = ({ children }: { children: React.ReactNode }) => {
     const navigate = useNavigate()
     const location = useLocation();
+    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const [isLoggedIn, setLoggedIn] = useState(() => {
+    // Check if user is authenticated via cookie
+    const checkAuth = async () => {
+        try {
+            const response = await fetch(`${PATH}/api/auth/me`, {
+                method: 'GET',
+                credentials: 'include', // Send cookie
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-        const expiration = localStorage.getItem(experationName);
-        if (!expiration) return false;
-
-        // check if token expired
-        const now = new Date().getTime();
-        return now < Number(expiration);
-    });
-    const handleLogin = () => {
-        console.log('logged in succesfuly');
-        const expiration = new Date().getTime() + 60 * 60 * 1000; // +1 hour
-        localStorage.setItem(experationName, expiration.toString());
-        setLoggedIn(true)
-        navigate('/')
-    }
-    const handleLogout = () => {
-        console.log('logged out succesfuly');
-        localStorage.removeItem(experationName);
-
-        setLoggedIn(false)
-    }
-    useEffect(() => {
-        console.log('userefect', isLoggedIn);
-
-        const expiration = localStorage.getItem("login_expiration");
-        const now = new Date().getTime();
-
-        if (!expiration || now >= Number(expiration)) {
-            // expired or not found
+            if (response.ok) {
+                setLoggedIn(true);
+            } else {
+                setLoggedIn(false);
+            }
+        } catch (error) {
+            console.error('Auth check failed:', error);
             setLoggedIn(false);
-            localStorage.removeItem("login_expiration");
-
-            if (location.pathname !== "/register") navigate("/login");
-
+        } finally {
+            setIsLoading(false);
         }
-    }, [isLoggedIn, location.pathname, navigate])
+    };
+
+    const handleLogin = () => {
+        console.log('logged in successfully');
+        setLoggedIn(true);
+        navigate('/');
+    };
+
+    const handleLogout = async () => {
+        try {
+            await fetch(`${PATH}/api/auth/logout`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        } catch (error) {
+            console.error('Logout failed:', error);
+        } finally {
+            console.log('logged out successfully');
+            setLoggedIn(false);
+            navigate('/login');
+        }
+    };
+
+    // Check auth on mount
+    useEffect(() => {
+        checkAuth();
+    }, []);
+
+    // Redirect if not logged in
+    useEffect(() => {
+        if (!isLoading && !isLoggedIn && location.pathname !== "/register" && location.pathname !== "/login") {
+            navigate("/login");
+        }
+    }, [isLoggedIn, location.pathname, navigate, isLoading]);
     return (
         <LoginContext.Provider value={{ isLoggedIn, handleLogin, handleLogout }}>
             {children}

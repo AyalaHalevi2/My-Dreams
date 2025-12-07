@@ -32,11 +32,13 @@ export const authenticate = async (req: AuthRequest, res: Response, next: NextFu
         }
 
         // Verify token
-        const decoded = jwt.verify(token, JWT_SECRET) as { id: string };
+        const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; email: string };
+
+        console.log('🔐 Token verified for user:', decoded.userId);
 
         // Attach user ID to the request object
         req.user = {
-            _id: decoded.id
+            _id: decoded.userId
         };
 
         next();

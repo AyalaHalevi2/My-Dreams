@@ -8,7 +8,7 @@ const Login = () => {
   const [message, setMessage] = useState<string>('');
   const [isOK, setIsOK] = useState<"red" | "grey" | "">("");
   const { handleLogin } = useContext(LoginContext)
-    const {theme} = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
@@ -31,6 +31,9 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
 
+      console.log('🍪 Login response headers:', response.headers);
+      console.log('🍪 Cookies after login:', document.cookie);
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -41,6 +44,7 @@ const Login = () => {
 
       setMessage('Login successful');
       setIsOK("");
+      console.log('🍪 Cookies after successful login:', document.cookie);
       setTimeout(() => {
 
         console.log('log');
@@ -54,7 +58,7 @@ const Login = () => {
     }
   };
   return (
-    <div className={styles.container}  data-theme={theme === 'dark' ? 'dark' : 'light'} >
+    <div className={styles.container} data-theme={theme === 'dark' ? 'dark' : 'light'} >
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>Welcome Back</h1>
         <p className={styles.subtitle}>Enter your credentials to access your account</p>

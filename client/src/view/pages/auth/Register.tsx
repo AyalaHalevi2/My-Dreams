@@ -8,8 +8,40 @@ const Register = () => {
   const [message, setMessage] = useState<string>('');
   const [isOK, setIsOK] = useState<"red" | "grey" | "">("");
   const { handleLogin } = useContext(LoginContext)
-    const {theme} = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
 
+  async function fetchRegister(name: string, email: string, password: string) {
+    try {
+
+      const response = await fetch(`${PATH}/api/auth/register`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      console.log('🍪 Register response headers:', response.headers);
+      console.log('🍪 Cookies after register:', document.cookie);
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMessage(data.message || 'Registration failed');
+        setIsOK("red");
+        throw new Error(data.message || 'Registration failed');
+      }
+      setMessage('Registration successful');
+      setIsOK("");
+      console.log('🍪 Cookies after successful register:', document.cookie);
+      return true;
+
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
@@ -23,37 +55,23 @@ const Register = () => {
         setIsOK("red");
         throw new Error("email, password, or name missing");
       }
+      const success = await fetchRegister(name, email, password);
 
-      const response = await fetch(`${PATH}/api/auth/register`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setMessage(data.message || 'Registration failed');
-        setIsOK("red");
+      if (!success) {
         return;
       }
 
-      setMessage('Registration successful');
-      setIsOK("");
       setTimeout(() => {
         handleLogin()
       }, 600);
 
-
     } catch (error: any) {
-      console.error(`Error in handle submit in login: ${error.message}`);
+      console.error(`Error in handle submit in register: ${error.message}`);
     }
   };
+
   return (
-    <div className={styles.container}  data-theme={theme === 'dark' ? 'dark' : 'light'}>
+    <div className={styles.container} data-theme={theme === 'dark' ? 'dark' : 'light'}>
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>Create Account</h1>
         <p className={styles.subtitle}>Sign up to get started</p>
@@ -94,7 +112,7 @@ const Register = () => {
             Sign up
           </button>
         </form>
-        <p className={`${styles.message} ${isOK}`}>{message}</p>
+        <p className={`${styles.message}`}>{message}</p>
         <div className={styles.link}>
           Already have an account? <Link to="/login" className={styles.linkTo}>Login here</Link>
         </div>

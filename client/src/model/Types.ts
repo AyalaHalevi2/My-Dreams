@@ -8,7 +8,7 @@ export interface Dream {
     clarity: number;
     mood?: 'happy' | 'sad' | 'scared' | 'confused' | 'peaceful' | 'anxious' | 'excited' | 'neutral';
     tags?: string[];
-    isFavorite: boolean;
+    isFavorite?: boolean;
     createdAt?: Date;
     updatedAt?: Date;
 }

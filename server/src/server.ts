@@ -14,7 +14,7 @@ import dreamRoutes from './routes/dreamRoutes'; // <-- UPDATED to use your actua
 // Create Express app
 const app: Express = express();
 const MONGODB = process.env.MONGODBURL;
-const PORT = process.env.PORT || 5010;
+const PORT = process.env.PORT;
 
 // Connect to MongoDB
 
@@ -42,7 +42,7 @@ app.use(cookieParser());
 // CORS configuration
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: ["http://localhost:3004", "http://localhost:5173", "http://localhost:5174"],
     credentials: true,
     optionsSuccessStatus: 200
   })
@@ -75,7 +75,7 @@ app.get('/', (_req: Request, res: Response) => {
         me: 'GET /api/auth/me'
       },
       dreams: {
-   getAll: 'GET /api/dreams',
+        getAll: 'GET /api/dreams',
         getOne: 'GET /api/dreams/:id',
         create: 'POST /api/dreams',
         update: 'PUT /api/dreams/:id',

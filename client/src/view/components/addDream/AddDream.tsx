@@ -19,7 +19,7 @@ const AddDream = () => {
 
     {openAddDreamForm && (
       <Modal>
-        <AddDreamForm />
+        <AddDreamForm setOpenAddDreamForm={setOpenAddDreamForm}  />
       </Modal>
     )}
     </>

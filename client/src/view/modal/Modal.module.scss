@@ -9,10 +9,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+z-index: 2000;
     &Box {
-       max-width: 600px;
-        background-color: white;
+        background-color: var(--bg-primary);
         padding: 20px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         border-radius: 8px;

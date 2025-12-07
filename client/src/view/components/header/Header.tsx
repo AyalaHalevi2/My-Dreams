@@ -1,4 +1,5 @@
 import AddDream from '../addDream/AddDream';
+import { Link } from 'react-router';
 import SearchBar from '../searchBar/SearchBar';
 import ThemeToggle from '../themeToggle/ThemeToggle';
 import UserInfoHoverSection from '../userInfo/UserInfoHoverSection';
@@ -6,10 +7,14 @@ import styles from './Header.module.scss';
 
 
 const Header = () => {
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   return (
     <header className={styles.container}>
-      
-      <div className={styles.logo}>DREAMER</div>
+
+      <Link to="/" className={styles.logo} onClick={handleScrollToTop}>DREAMER</Link>
  <div className={styles.searchBar}><SearchBar /></div>
       <div className={styles.actions}>
         <button className={styles.favoritesBtn}>
