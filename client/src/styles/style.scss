@@ -1,0 +1,21 @@
+:root {
+    --font-text: "Winky Sans", sans-serif;
+    --font-title: "RocknRoll One", sans-serif;
+    font-family: var(--font-text);
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-lg);
+
+}

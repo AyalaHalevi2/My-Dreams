@@ -1,0 +1,80 @@
+button{
+  font-family: var(--font-text);
+}
+
+.buttonGeneral {
+  padding: 6px 12px;
+  background-color: var(--error);
+  color: var(--text-on-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  /* מוסיף מעבר חלק לכל השינויים */
+  transition: all 0.4s ease-out;
+  /* מבטיח שהכפתור מוכן לטרנספורמציות */
+  transform: translateY(0);
+&:hover {
+  color: var(--text-on-secondary);
+  background-color: var(--primary-light);
+  /* מעלה את הכפתור ב-2 פיקסלים כלפי מעלה */
+  transform: translateY(-2px);
+}
+&:active {
+
+  /* מחזיר את הכפתור למקומו המקורי בעת לחיצה */
+  transform: translateY(0);
+}
+
+}
+.buttonYellow{
+ padding: 6px 12px;
+  background-color: var(--star-glow);
+  color: var(--primary-dark);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  /* מוסיף מעבר חלק לכל השינויים */
+  transition: all 0.4s ease-out;
+  /* מבטיח שהכפתור מוכן לטרנספורמציות */
+  transform: translateY(0);
+&:hover {
+  background-color: var(--primary-hover);
+  /* מעלה את הכפתור ב-2 פיקסלים כלפי מעלה */
+  transform: translateY(-2px);
+}
+&:active {
+
+  /* מחזיר את הכפתור למקומו המקורי בעת לחיצה */
+  transform: translateY(0);
+}
+}
+
+.buttonClose {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.3s ease;
+&:hover {
+  background-color: var(--text-on-secondary);
+
+  /* מעלה את הכפתור ב-2 פיקסלים כלפי מעלה */
+}
+  &:active {
+    background-color: rgba(0, 0, 0, 0.192);
+  }
+}
