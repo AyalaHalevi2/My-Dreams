@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
-const JWT_EXPIRE = process.env.JWT_EXPIRE || '30d';
+const JWT_EXPIRE = process.env.JWT_EXPIRE || '3d';
 interface TokenPayload {
   userId: string;
   email: string;
