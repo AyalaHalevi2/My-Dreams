@@ -26,61 +26,6 @@
     // Use a small shadow variable
     box-shadow: var(--shadow-sm);
   }
-
-  &Header {
-    font-size: 20px;
-    font-weight: 600;
-    // Use text-primary for the title
-    color: var(--text-primary);
-    margin: 0 0 1rem 0;
-
-  }
-
-  &Title {
-    font-size: 18px;
-    font-weight: 500;
-    // Use text-primary for the title
-    color: var(--text-secondary);
-    margin: 1rem 0;
-
-  }
-
-  &Options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    color: var(--text-primary);
-
-    .checkboxLabel {
-      display: inline-block;
-      cursor: pointer;
-
-      input.checkbox {
-        display: none; // Hide the default checkbox
-      }
-
-      .checkboxText {
-        display: inline-block;
-        padding: 0.25rem 0.75rem; // px-3 py-1
-        border-radius: 9999px; // rounded-full
-        font-size: 0.875rem; // text-sm
-        transition: all 0.3s ease;
-        background-color: var(--bg-primary); // bg-gray-100
-        color: #374151; // text-gray-700
-
-        &:hover {
-          background-color: #e5e7eb; // hover:bg-gray-200
-        }
-      }
-
-      input.checkbox:checked+.checkboxText {
-        background-color: var(--secondary-color); // bg-purple-500
-        color: var(--primary-dark)
-      }
-    }
-
-  }
-
 }
 
 .buttonAll {
