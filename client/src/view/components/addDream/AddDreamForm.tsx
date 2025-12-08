@@ -1,13 +1,15 @@
+import { AddFormContext } from '../../../model/openAddDreamForm/OpenAddDreamForm';
 import { moods, PATH, type Dream, type Mood } from '../../../model/Types';
 import style from './AddDream.module.scss';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 interface AddDreamFormProps {
-    setOpenAddDreamForm: React.Dispatch<React.SetStateAction<boolean>>;
+    setDreams: React.Dispatch<React.SetStateAction<Dream[]>>;
 }
 
-const AddDreamForm = ({ setOpenAddDreamForm }: AddDreamFormProps) => {
 
+const AddDreamForm = ({ setDreams }: AddDreamFormProps) => {
+    const { handleToggleAddDreamForm} = useContext(AddFormContext);
     const [activeMood, setActiveMood] = useState<Mood>();
     const [isClosing, setIsClosing] = useState(false);
     const [massage, setMassage] = useState<string>('');
@@ -19,7 +21,7 @@ const AddDreamForm = ({ setOpenAddDreamForm }: AddDreamFormProps) => {
     // Close animation
     const handleCloseForm = () => {
         setIsClosing(true);
-        setTimeout(() => setOpenAddDreamForm(false), 300);
+        setTimeout(handleToggleAddDreamForm, 300);
     };
 
     // POST request
@@ -76,7 +78,7 @@ const AddDreamForm = ({ setOpenAddDreamForm }: AddDreamFormProps) => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         const data = new FormData(event.target as HTMLFormElement);
-
+        const  date = data.get('date') ? new Date(data.get('date') as string) : null;
         const title = data.get('title') as string;
         const content = data.get('content') as string;
         const clarity = Number(data.get('clarity'));
@@ -87,25 +89,22 @@ const AddDreamForm = ({ setOpenAddDreamForm }: AddDreamFormProps) => {
             return;
         }
 
-        if (!activeMood) {
-            setMassage('Please select a mood for your dream.');
-            return;
-        }
 
         const newDream: Dream = {
             title,
             content,
-            date: new Date(),
+            date: date || new Date(),
             clarity,
             mood: activeMood,
             tags,      // optional
         };
 
         const result = await createDream(newDream);
-console.log(result);
+        console.log(result);
 
         if (result) {
             setMassage('Your dream has been added successfully ✨');
+            setDreams(prevDreams => [result, ...prevDreams]);
             setTimeout(() => handleCloseForm(), 600);
         }
     };
