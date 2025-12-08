@@ -11,6 +11,7 @@ import { ThemeContext } from '../../../model/theme/ThemeProvider';
 
 function Home() {
     const {theme} = useContext(ThemeContext)
+    
     return (
         <div className='homeWrapper' data-theme={theme === 'dark' ? 'dark' : 'light'}>
             <div className="header"> <Header /></div>

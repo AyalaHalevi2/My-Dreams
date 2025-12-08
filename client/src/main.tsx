@@ -7,18 +7,21 @@ import Register from './view/pages/auth/Register.tsx'
 import Favorites from './view/pages/favorites/Favorites.tsx'
 import { ThemeProvider } from './model/theme/ThemeProvider.tsx'
 import { LoginProvider } from './model/isLoggedin/LoginProvider.tsx'
+import { AddDreamFormProvider } from './model/openAddDreamForm/OpenAddDreamForm.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
         <LoginProvider>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/favorites' element={<Favorites />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-          </Routes>
+          <AddDreamFormProvider>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/favorites' element={<Favorites />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+            </Routes>
+            </AddDreamFormProvider>
         </LoginProvider>
       </ThemeProvider>
     </BrowserRouter>
