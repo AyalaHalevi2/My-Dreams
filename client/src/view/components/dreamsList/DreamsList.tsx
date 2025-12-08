@@ -1,19 +1,20 @@
 import styles from './DreamsList.module.scss';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DreamCard from '../dreamCard/DreamCard';
-import { PATH, type Dream} from '../../../model/Types';
+import { PATH, type Dream } from '../../../model/Types';
 //import { demoDreams } from '../../../model/Types';
 import Filters from '../filters/Filters';
 import SortDreams from '../sortDreams/SortDreams';
 import Modal from '../../modal/Modal';
 import AddDreamForm from '../addDream/AddDreamForm';
-import { AddFormContext } from '../../../model/openAddDreamForm/OpenAddDreamForm';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../../redux/store';
 // API helper
 
 const DreamsList = () => {
   const [dreams, setDreams] = useState<Dream[]>([]);
   const [filteredDreams, setFilteredDreams] = useState<Dream[]>(dreams);
- const {toggleAddDreamForm} = useContext(AddFormContext);
+  const openAddDreamForm = useSelector((state: RootState) => state.openAddDreamForm.isOpen);
   // Load dreams once on mount
   useEffect(() => {
     fetchDreams();
@@ -30,11 +31,11 @@ const DreamsList = () => {
       });
       const data = await response.json();
       if (response.ok) {
-         const dreamsWithDates = data.dreams.map((dream: Dream) => ({
-        ...dream,
-        date: new Date(dream.date)
-      }));
-      setDreams(dreamsWithDates);
+        const dreamsWithDates = data.dreams.map((dream: Dream) => ({
+          ...dream,
+          date: new Date(dream.date)
+        }));
+        setDreams(dreamsWithDates);
       } else {
         throw new Error("Failed to fetch dreams");
       }
@@ -73,7 +74,7 @@ const DreamsList = () => {
           )}
         </div>
       </div>
-      { toggleAddDreamForm&& (
+      {openAddDreamForm && (
         <Modal>
           <AddDreamForm setDreams={setDreams} />
         </Modal>

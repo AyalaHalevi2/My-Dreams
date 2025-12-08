@@ -1,14 +1,15 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import styles from './Auth.module.scss'
 import { Link } from 'react-router';
-import { LoginContext } from '../../../model/isLoggedin/LoginProvider';
-import { ThemeContext } from '../../../model/theme/ThemeProvider';
 import { PATH } from '../../../model/Types';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleLogin } from '../../../redux/slices/AuthSlice';
 const Login = () => {
   const [message, setMessage] = useState<string>('');
   const [isOK, setIsOK] = useState<"red" | "grey" | "">("");
-  const { handleLogin } = useContext(LoginContext)
-  const { theme } = useContext(ThemeContext)
+  const dispatch = useDispatch();
+  const theme = useSelector((state: any) => state.theme.theme);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
@@ -49,7 +50,7 @@ const Login = () => {
 
         console.log('log');
 
-        handleLogin()
+        dispatch(handleLogin());
       }, 600);
 
 

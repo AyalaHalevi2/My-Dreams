@@ -1,5 +1,5 @@
 import styles from './Filter.module.scss';
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { moods, type Dream, type Mood } from '../../../model/Types';
 
 interface FiltersProps {
@@ -32,7 +32,7 @@ const Filters = ({ dreams, setFilteredDreams }: FiltersProps) => {
                 : [...prev, level]
         )
     };
-     useEffect(() => {
+    useEffect(() => {
         setFilteredDreams(dreams.filter(dream =>
             (selectedMoods.length === 0 || (dream.mood && selectedMoods.includes(dream.mood))) &&
             (selectedClarity.length === 0 || selectedClarity.includes(dream.clarity))

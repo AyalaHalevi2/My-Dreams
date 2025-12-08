@@ -2,15 +2,19 @@
 import './Home.scss'
 import '../../../styles/theme.scss';
 
-import { useContext } from 'react';
+import { useEffect } from 'react';
 import DreamsList from '../../components/dreamsList/DreamsList';
 import Header from '../../components/header/Header';
-
-import { ThemeContext } from '../../../model/theme/ThemeProvider';
-
+import { checkAuth } from '../../../functions/FetchFuncitons';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../../redux/store';
 
 function Home() {
-    const {theme} = useContext(ThemeContext)
+    const theme = useSelector((state: RootState) => state.theme.theme);
+
+    useEffect(() => {
+        checkAuth();
+    }, []);
     
     return (
         <div className='homeWrapper' data-theme={theme === 'dark' ? 'dark' : 'light'}>

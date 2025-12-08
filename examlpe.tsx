@@ -675,3 +675,124 @@ const AddDreamForm = () => {
 
 export default AddDreamForm;
 
+
+
+//loginPrivude - context
+
+import React, { createContext, useEffect, useState } from "react"
+
+import { PATH } from "../Types"
+
+const LoginContext = createContext({
+    isLoggedIn: true,
+    handleLogin: () => { },
+    handleLogout: () => { }
+})
+
+const LoginProvider = ({ children }: { children: React.ReactNode }) => {
+    const navigate = useNavigate()
+    const location = useLocation();
+    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    // Check if user is authenticated via cookie
+
+
+    const handleLogin = () => {
+        console.log('logged in successfully');
+        setLoggedIn(true);
+        navigate('/');
+    };
+
+    const handleLogout = async () => {
+        try {
+            await fetch(`${PATH}/api/auth/logout`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        } catch (error) {
+            console.error('Logout failed:', error);
+        } finally {
+            console.log('logged out successfully');
+            setLoggedIn(false);
+            navigate('/login');
+        }
+    };
+
+    // Check auth on mount
+    useEffect(() => {
+        checkAuth();
+    }, []);
+
+    // Redirect if not logged in
+    useEffect(() => {
+        if (!isLoading && !isLoggedIn && location.pathname !== "/register" && location.pathname !== "/login") {
+            navigate("/login");
+        }
+    }, [isLoggedIn, location.pathname, navigate, isLoading]);
+    return (
+        <LoginContext.Provider value={{ isLoggedIn, handleLogin, handleLogout }}>
+            {children}
+        </LoginContext.Provider>
+    )
+}
+export { LoginContext, LoginProvider }
+//change to login provider
+
+
+//openAddDreamFormProvider - context
+import { createContext, useState } from "react"
+
+const AddFormContext = createContext({
+toggleAddDreamForm: false,
+    handleToggleAddDreamForm: () => { }
+})
+
+const AddDreamFormProvider = ({ children }: { children: React.ReactNode }) => {
+    const [ toggleAddDreamForm,setToggleAddDreamForm ] = useState(false);
+    const handleToggleAddDreamForm = () => { setToggleAddDreamForm(!toggleAddDreamForm) };
+    return (
+        <AddFormContext.Provider value={{ toggleAddDreamForm, handleToggleAddDreamForm }}>
+            {children}
+        </AddFormContext.Provider>
+    )
+}
+
+export { AddFormContext, AddDreamFormProvider }
+
+
+//themeProvider - context
+import { createContext, useEffect, useState } from "react"
+
+const ThemeContext = createContext({
+    theme: "dark" as 'light' | 'dark',
+    handleToggleTheme: () => { }
+})
+const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+    const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+        const savedTheme = localStorage.getItem("theme");
+        return savedTheme === "light" || savedTheme === "dark"
+            ? savedTheme
+            : "light";
+    });
+    const handleToggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    console.log("theme", theme);
+
+    }
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+    return (
+        <ThemeContext.Provider value={{ theme, handleToggleTheme }}>
+            {children}
+        </ThemeContext.Provider>
+    )
+}
+export { ThemeProvider, ThemeContext };
+

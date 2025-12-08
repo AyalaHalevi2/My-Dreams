@@ -1,13 +1,13 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import styles from './Auth.module.scss'
 import { Link } from 'react-router';
-import { LoginContext } from '../../../model/isLoggedin/LoginProvider';
-import { ThemeContext } from '../../../model/theme/ThemeProvider';
 import { PATH } from '../../../model/Types';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleLogin } from '../../../redux/slices/AuthSlice';
 const Register = () => {
   const [message, setMessage] = useState<string>('');
-  const { handleLogin } = useContext(LoginContext)
-  const { theme } = useContext(ThemeContext)
+  const dispatch = useDispatch();
+  const theme = useSelector((state: any) => state.theme.theme);
 
   async function fetchRegister(name: string, email: string, password: string) {
     try {
@@ -61,7 +61,7 @@ const Register = () => {
       }
 
       setTimeout(() => {
-        handleLogin()
+        dispatch(handleLogin());
       }, 600);
 
     } catch (error: any) {

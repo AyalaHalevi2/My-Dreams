@@ -5,17 +5,17 @@ interface DreamCardProps {
 }
 
 const DreamCard = ({ dream }: DreamCardProps) => {
-return(
-  <div className={styles.card}>
-    <h2 className={styles.title}>{dream.title}</h2>
-    <p className={styles.content}>{dream.content}</p>
-    <div className={styles.meta}>
-      <span className={styles.date}>{new Date(dream.date).toLocaleDateString()}</span>
-      <span className={styles.clarity}>Clarity: {dream.clarity}</span>
-      {dream.mood && <span className={styles.mood}>Mood: {dream.mood}</span>}
+  return (
+    <div className={styles.card}>
+      <h2 className={styles.title}>{dream.title}</h2>
+      <p className={styles.content}>{dream.content}</p>
+      <div className={styles.meta}>
+        <span className={styles.date}>{new Date(dream.date).toLocaleDateString()}</span>
+        <span className={styles.clarity}>Clarity: {dream.clarity}</span>
+        {dream.mood && <span className={styles.mood}>Mood: {dream.mood}</span>}
+      </div>
     </div>
-  </div>
-)
+  )
 
 }
 

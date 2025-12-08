@@ -1,7 +1,8 @@
-import { AddFormContext } from '../../../model/openAddDreamForm/OpenAddDreamForm';
+import { useDispatch } from 'react-redux';
 import { moods, PATH, type Dream, type Mood } from '../../../model/Types';
 import style from './AddDream.module.scss';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { closeAddDreamForm } from '../../../redux/slices/toggleAddDreamFormSlice';
 
 interface AddDreamFormProps {
     setDreams: React.Dispatch<React.SetStateAction<Dream[]>>;
@@ -9,7 +10,8 @@ interface AddDreamFormProps {
 
 
 const AddDreamForm = ({ setDreams }: AddDreamFormProps) => {
-    const { handleToggleAddDreamForm} = useContext(AddFormContext);
+    const dispatch = useDispatch();
+
     const [activeMood, setActiveMood] = useState<Mood>();
     const [isClosing, setIsClosing] = useState(false);
     const [massage, setMassage] = useState<string>('');
@@ -21,7 +23,7 @@ const AddDreamForm = ({ setDreams }: AddDreamFormProps) => {
     // Close animation
     const handleCloseForm = () => {
         setIsClosing(true);
-        setTimeout(handleToggleAddDreamForm, 300);
+        setTimeout(() => dispatch(closeAddDreamForm()), 300);
     };
 
     // POST request
@@ -78,7 +80,7 @@ const AddDreamForm = ({ setDreams }: AddDreamFormProps) => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         const data = new FormData(event.target as HTMLFormElement);
-        const  date = data.get('date') ? new Date(data.get('date') as string) : null;
+        const date = data.get('date') ? new Date(data.get('date') as string) : null;
         const title = data.get('title') as string;
         const content = data.get('content') as string;
         const clarity = Number(data.get('clarity'));

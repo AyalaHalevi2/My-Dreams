@@ -5,25 +5,23 @@ import Home from './view/pages/home/Home.tsx'
 import Login from './view/pages/auth/Login.tsx'
 import Register from './view/pages/auth/Register.tsx'
 import Favorites from './view/pages/favorites/Favorites.tsx'
-import { ThemeProvider } from './model/theme/ThemeProvider.tsx'
-import { LoginProvider } from './model/isLoggedin/LoginProvider.tsx'
-import { AddDreamFormProvider } from './model/openAddDreamForm/OpenAddDreamForm.tsx'
+//import { ThemeProvider } from './model/theme/ThemeProvider.tsx'
+//import { LoginProvider } from './model/isLoggedin/LoginProvider.tsx'
+//import { AddDreamFormProvider } from './model/openAddDreamForm/OpenAddDreamForm.tsx'
+import { Provider } from 'react-redux'
+import { store } from './redux/store.ts'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <ThemeProvider>
-        <LoginProvider>
-          <AddDreamFormProvider>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/favorites' element={<Favorites />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
-            </Routes>
-            </AddDreamFormProvider>
-        </LoginProvider>
-      </ThemeProvider>
+      <Provider store={store}>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/favorites' element={<Favorites />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Routes>
+      </Provider>
     </BrowserRouter>
   </StrictMode>
 )

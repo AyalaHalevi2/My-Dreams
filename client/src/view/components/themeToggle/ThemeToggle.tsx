@@ -1,18 +1,21 @@
 import styles from './ThemeToggle.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTheme } from '../../../redux/slices/ThemeSlice';
+import type { RootState } from '../../../redux/store';
 
-import { ThemeContext } from '../../../model/theme/ThemeProvider';
-import { useContext } from 'react';
+
 const ThemeToggle = () => {
-//iport context or state to manage theme
-  const { theme, handleToggleTheme } = useContext(ThemeContext); // Example state
+  const dispatch = useDispatch();
+  const theme = useSelector((state: RootState) => state.theme.theme);
+  
   return (
     <button
-      className={`${styles.container} ${theme==='dark'?styles.dark : ''}`}
-      onClick={handleToggleTheme}
+      className={`${styles.container} ${theme === 'dark' ? styles.dark : ''}`}
+      onClick={() => dispatch(toggleTheme())}
       aria-label="Toggle theme"
     >
       <div className={styles.slider}>
-        
+
       </div>
     </button>
   );
