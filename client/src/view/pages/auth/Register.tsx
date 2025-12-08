@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './Auth.module.scss'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { PATH } from '../../../model/Types';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleLogin } from '../../../redux/slices/AuthSlice';
@@ -8,6 +8,7 @@ const Register = () => {
   const [message, setMessage] = useState<string>('');
   const dispatch = useDispatch();
   const theme = useSelector((state: any) => state.theme.theme);
+  const navigate = useNavigate();
 
   async function fetchRegister(name: string, email: string, password: string) {
     try {
@@ -60,9 +61,14 @@ const Register = () => {
         return;
       }
 
-      setTimeout(() => {
-        dispatch(handleLogin());
-      }, 600);
+      // update redux state, localStorage and navigate to home
+      dispatch(handleLogin());
+      try {
+        localStorage.setItem('isLoggedIn', 'true');
+      } catch (e) {
+        console.warn('Could not write isLoggedIn to localStorage', e);
+      }
+      navigate('/');
 
     } catch (error: any) {
       console.error(`Error in handle submit in register: ${error.message}`);

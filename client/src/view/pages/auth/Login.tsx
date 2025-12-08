@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './Auth.module.scss'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { PATH } from '../../../model/Types';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleLogin } from '../../../redux/slices/AuthSlice';
@@ -9,6 +9,7 @@ const Login = () => {
   const [isOK, setIsOK] = useState<"red" | "grey" | "">("");
   const dispatch = useDispatch();
   const theme = useSelector((state: any) => state.theme.theme);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -46,12 +47,15 @@ const Login = () => {
       setMessage('Login successful');
       setIsOK("");
       console.log('🍪 Cookies after successful login:', document.cookie);
-      setTimeout(() => {
 
-        console.log('log');
-
-        dispatch(handleLogin());
-      }, 600);
+      // update redux state, localStorage and navigate to home
+      dispatch(handleLogin());
+      try {
+        localStorage.setItem('isLoggedIn', 'true');
+      } catch (e) {
+        console.warn('Could not write isLoggedIn to localStorage', e);
+      }
+      navigate('/');
 
 
     } catch (error: any) {

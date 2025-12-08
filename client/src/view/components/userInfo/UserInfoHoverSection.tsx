@@ -1,7 +1,14 @@
 import styles from './UserInfoHoverSection.module.scss';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { logout as apiLogout } from '../../../functions/FetchFuncitons';
+import { handleLogout } from '../../../redux/slices/AuthSlice';
+
 export default function UserInfoHoverSection() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <div
@@ -19,8 +26,8 @@ export default function UserInfoHoverSection() {
       </button>
 
       {isOpen && (
-        <div className={styles.dropdown} role="menu"       onMouseLeave={() => setIsOpen(false)}
->
+        <div className={styles.dropdown} role="menu" onMouseLeave={() => setIsOpen(false)}
+        >
           <div className={styles.header}>user info</div>
           <button className={styles.menuItem} onClick={() => console.log('user info')}>
             user info
@@ -28,7 +35,18 @@ export default function UserInfoHoverSection() {
           <button className={styles.menuItem} onClick={() => console.log('favorites')}>
             favorites
           </button>
-          <button className={`${styles.menuItem} ${styles.logout}`} onClick={() => console.log('logout')}>
+          <button
+            className={`${styles.menuItem} ${styles.logout}`}
+            onClick={async () => {
+              try {
+                await apiLogout();
+              } catch (e) {
+                console.error('Logout api error', e);
+              }
+              dispatch(handleLogout());
+              navigate('/login');
+            }}
+          >
             logout
           </button>
         </div>
