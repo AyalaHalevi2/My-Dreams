@@ -13,9 +13,10 @@ const SortDreams = ({ dreams, setDreams }: SortDreamsProps) => {
 
 
     function handleSort(option: string) {
+        console.log(dreams);
         setSelectedOption(option);
         setDreams(prevDreams => {
-            let sortedDreams = [...(prevDreams)];
+            let sortedDreams: Dream[] = [...(prevDreams)];
             switch (option) {
                 case 'Date New to Old':
                     sortedDreams.sort((a, b) => a.date.getTime() - b.date.getTime());
