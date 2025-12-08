@@ -6,7 +6,6 @@ import { ThemeContext } from '../../../model/theme/ThemeProvider';
 import { PATH } from '../../../model/Types';
 const Register = () => {
   const [message, setMessage] = useState<string>('');
-  const [isOK, setIsOK] = useState<"red" | "grey" | "">("");
   const { handleLogin } = useContext(LoginContext)
   const { theme } = useContext(ThemeContext)
 
@@ -29,11 +28,11 @@ const Register = () => {
 
       if (!response.ok) {
         setMessage(data.message || 'Registration failed');
-        setIsOK("red");
+
         throw new Error(data.message || 'Registration failed');
       }
       setMessage('Registration successful');
-      setIsOK("");
+
       console.log('🍪 Cookies after successful register:', document.cookie);
       return true;
 
@@ -52,7 +51,7 @@ const Register = () => {
 
       if (!email || !password || !name) {
         setMessage('Email, password, and name are required');
-        setIsOK("red");
+
         throw new Error("email, password, or name missing");
       }
       const success = await fetchRegister(name, email, password);
