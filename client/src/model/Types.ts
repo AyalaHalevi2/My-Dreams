@@ -1,6 +1,6 @@
 export const PATH = 'http://localhost:3004';
 export interface Dream {
-    id?: string;
+    _id?: string;
     userId?: string;
     title: string;
     content: string;
@@ -14,11 +14,11 @@ export interface Dream {
 }
 
 export interface User {
-    id: string;
+   _id?: string;
     email: string;
-    password: string;
+    password?: string;
     name: string;
-    createdAt: Date;
+    createdAt?: Date;
 }
 
 export const moods: Mood[] = ['happy', 'sad', 'scared', 'confused', 'peaceful', 'anxious', 'excited', 'neutral'];
@@ -26,7 +26,7 @@ export type Mood = undefined | 'happy'    | 'sad'    | 'scared'    | 'confused' 
 
  export const demoDreams: Dream[] = [
   {
-    id: "1",
+   _id: "1",
     userId: "123",
     title: "Flying Over the City",
     content: "I was flying above a glowing purple city. The streets looked endless, and every time I tried to land, the wind lifted me higher.",
@@ -39,7 +39,7 @@ export type Mood = undefined | 'happy'    | 'sad'    | 'scared'    | 'confused' 
     updatedAt: new Date("2024-11-05"),
   },
   {
-    id: "2",
+   _id: "2",
     userId: "123",
     title: "Lost in the Forest",
     content: "I wandered through a dark forest where the trees whispered. I kept searching for a path but everything looked the same.",
@@ -52,7 +52,7 @@ export type Mood = undefined | 'happy'    | 'sad'    | 'scared'    | 'confused' 
     updatedAt: new Date("2024-12-01"),
   },
   {
-    id: "3",
+   _id: "3",
     userId: "123",
     title: "Meeting an Old Friend",
     content: "I met my childhood friend in a quiet café. We talked for hours even though in real life we haven’t spoken in years.",
@@ -65,7 +65,7 @@ export type Mood = undefined | 'happy'    | 'sad'    | 'scared'    | 'confused' 
     updatedAt: new Date("2025-01-11"),
   },
   {
-    id: "4",
+   _id: "4",
     userId: "123",
     title: "Running Late Again",
     content: "I was late for an important exam but every hallway led to another hallway. No doors, no signs, just endless school corridors.",

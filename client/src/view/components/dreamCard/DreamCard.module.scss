@@ -1,79 +1,144 @@
-/* Styling for the main card container */
 .card {
-  /* Background: Black-Night, Text: Silver-Stars */
-  background-color: var(--bg-card); /* #0A0A14 */
-  color: var(--text-on-primary); /* #B8C5E0 */
-
-  /* Layout and Spacing */
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 12px;
-
-  /* Border and Shadow for 'Night Sky' depth */
-  border: 1px solid var(--border-color); /* #1A1A2E (Dark Border) */
-  box-shadow: var(--shadow-md); /* Deep shadow */
-
-  /* Star Glow effect on hover */
-  transition: all 0.3s ease-in-out;
-}
-
-.card:hover {
-  /* Subtle border highlight on hover */
-  border-color: var(--border-hover); /* Gold-Stars on hover */
-  /* Intense shadow/glow on hover */
-  box-shadow: 0 0 15px var(--star-shimmer), var(--shadow-lg);
-  transform: translateY(-2px);
-}
-
-/* Styling for the dream title */
-.title {
-  /* Title color: Primary text (Silver-Stars) */
-  color: var(--text-primary); /* #B8C5E0 */
-  font-size: 1.6rem;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  /* Optional: Star-like text effect for the title */
-  /* text-shadow: 0 0 8px var(--star-shimmer); */
-}
-
-/* Styling for the dream content/description */
-.content {
-  /* Content color: Secondary text (Subtle Gold/Faded Silver) */
-  color: var(--text-secondary); /* Faded Gold/Star Light */
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-/* Styling for the metadata section (date, clarity, mood) */
-.meta {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.2rem;
+  box-shadow: var(--shadow-md);
   display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  color: var(--text-primary);
+}
+
+/* ---------- Top Bar (title + star + buttons) ---------- */
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Group the buttons together */
+
+.actionGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Favorite toggle star */
+/* Favorite toggle star - מעודכן לשימוש ב-SVG */
+
+.favoriteToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  // font-size הוסר - גודל נקבע ע"י width/height של ה-SVG
+  // color נשאר ב-button כדי לשלוט ב-currentColor של ה-SVG
+
+  .favoriteIcon { // סלקטור חדש לאייקון ה-SVG
+    width: 1.5rem; // גודל האייקון - ניתן להתאים
+    height: 1.5rem;
+    color: var(--primary-light); // צבע ברירת המחדל
+    transition: 0.25s ease;
+    display: block; // כדי לוודא שאין רווחים מיותרים
+  }
+
+  // מצב Hover
+  &:hover .favoriteIcon {
+    color: var(--star-glow);
+    filter: drop-shadow(2px 10px 20px var(--star-shimmer)); // שימוש ב-filter להצללת SVG
+  }
+
+  // מצב Active
+  &.active .favoriteIcon {
+    color: var(--star-glow);
+    filter: drop-shadow(0 0 14px var(--star-shimmer)); // שימוש ב-filter להצללת SVG
+  }
+
+  // אם תרצי שהאייקון במצב Active יהיה ממולא (לא רק קו)
+  &.active .favoriteIcon {
+    fill: var(--star-glow); // מילוי פנימי (כמו כוכב מלא)
+    stroke: var(--star-glow); // צבע הקו
+    filter: drop-shadow(0 0 14px var(--star-shimmer));
+  }
+}
+
+// ניתן לפשט את הכללים של ה-favoriteToggle הראשי ולהשאיר רק את הכללים הכלליים של הכפתור
+.favoriteToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  // אין צורך ב-transition כאן, הוא הועבר ל-favoriteIcon
+}
+
+/* Edit/Delete buttons in style/bttons */
+
+
+.deleteBtn {
+  background: var(--primary-dark);
+}
+
+/* ---------- Content ---------- */
+
+.content {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+/* ---------- Tags ---------- */
+
+.tagsRow {
+  display: flex;
+  gap:1rem;
   flex-wrap: wrap;
+    font-size: 1.1rem;
+
+}
+
+.tagPill {
+  padding: 0.25rem 0.7rem;
+  background: var(--primary-dark);
+  border-radius: 12px;
+  color: var(--primary-light);
+      font-size:0.9rem;
+
+}
+
+/* ---------- Mood + Clarity ---------- */
+
+.attributesRow {
+  display: flex;
+  align-items: center;
   gap: 1rem;
-  padding-top: 1rem;
-  /* Separator line like a dark horizon */
-  border-top: 1px solid var(--divider-color); /* Dark Divider */
 }
 
-/* Styling for individual metadata spans */
-.date, .clarity, .mood {
-  /* Metadata color: Silver-Stars (lighter than content) */
-  color: var(--primary-light); /* #B8C5E0 */
+.moodPill {
+  padding: 0.25rem 0.7rem;
+  background: var(--primary-color);
+  border-radius: 12px;
+  color: var(--text-on-primary);
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+.clarityText {
   font-size: 0.9rem;
-  font-weight: 500;
+  font-style: italic;
+  color: var(--text-secondary);
 }
-
-/* Highlight Clarity and Mood with Gold-Star accent */
-.clarity, .mood {
-  /* Gold-Stars for important metadata */
-  color: var(--star-glow); /* #F3D76B */
+.lastRow{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-/* Optional: Add a subtle text shadow/shimmer to important metadata */
-.clarity {
-  text-shadow: 0 0 5px var(--star-shimmer);
-}
-
-.mood {
-  text-shadow: 0 0 5px var(--star-shimmer);
+.btns{
+  display: flex;
+  gap: 0.5rem;
 }

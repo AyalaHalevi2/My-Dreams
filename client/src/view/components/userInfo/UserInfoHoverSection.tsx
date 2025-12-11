@@ -1,9 +1,11 @@
 import styles from './UserInfoHoverSection.module.scss';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { logout as apiLogout } from '../../../functions/FetchFuncitons';
 import { handleLogout } from '../../../redux/slices/AuthSlice';
+//import Modal from '../../modal/Modal';
+//import UserInfo from './UserInfo';
 
 export default function UserInfoHoverSection() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,9 +34,12 @@ export default function UserInfoHoverSection() {
           <button className={styles.menuItem} onClick={() => console.log('user info')}>
             user info
           </button>
-          <button className={styles.menuItem} onClick={() => console.log('favorites')}>
-            favorites
-          </button>
+          <Link to='/favorites'>
+            <button className={styles.menuItem} onClick={() => console.log('favorites')}>
+              favorites
+            </button>
+          </Link>
+
           <button
             className={`${styles.menuItem} ${styles.logout}`}
             onClick={async () => {
@@ -51,6 +56,9 @@ export default function UserInfoHoverSection() {
           </button>
         </div>
       )}
+      {/* <Modal>
+        <UserInfo/>
+      </Modal> */}
     </div>
   );
 }

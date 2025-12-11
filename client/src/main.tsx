@@ -25,6 +25,12 @@ function AppRoutes() {
         const ok = await authMe();
         if (!mounted) return;
         dispatch(changeLoginState(ok));
+        //change the local storage too
+        try {
+          localStorage.setItem('isLoggedIn', ok ? 'true' : 'false');
+        } catch (e) {
+          console.warn('Could not write isLoggedIn to localStorage', e);
+        }
         if (!ok && location.pathname !== '/login' && location.pathname !== '/register') {
           navigate('/login');
         }

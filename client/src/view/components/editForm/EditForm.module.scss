@@ -1,0 +1,204 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.editDreamForm {
+  position: relative;
+  max-width: calc(100vw - 64px);
+  max-height: calc(100vh - 96px);
+  overflow: auto;
+  box-sizing: border-box;
+  background: var(--bg-card, #ffffff);
+  color: var(--text-primary, #0b1220);
+  padding: 26px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color, rgba(26, 26, 46, 0.15));
+  box-shadow: var(--shadow-md, 0 6px 18px rgba(0, 0, 0, 0.12));
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.fadeOutAnimation {
+  animation: fadeout 0.3s ease-in-out forwards;
+}
+
+.editDreamForm::-webkit-scrollbar {
+  width: 10px;
+}
+
+.editDreamForm::-webkit-scrollbar-thumb {
+  background: var(--star-shimmer, rgba(243, 215, 107, 0.2));
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 1.3rem;
+  margin: 0 0 12px 0;
+  color: var(--text-primary, #0f172a);
+  font-weight: 700;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.label {
+  font-size: 0.95rem;
+  color: var(--text-secondary, #6b7280);
+  font-weight: 600;
+}
+
+.input,
+.tagsInput,
+.textarea,
+input[type='date'] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, rgba(26, 26, 46, 0.12));
+  background: var(--bg-card, #fff);
+  color: var(--text-primary, #0b1220);
+  font-size: 0.95rem;
+  transition: box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.input:focus,
+.tagsInput:focus,
+.textarea:focus,
+input[type='date']:focus {
+  outline: none;
+  border-color: var(--secondary-color, --primary-color);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  accent-color: var(--secondary-color,--bg-card);
+}
+
+.checkboxLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary, #6b7280);
+  font-weight: 600;
+}
+
+.moodSelector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.moodButton {
+  -webkit-appearance: none;
+  appearance: none;
+  border: 1px solid rgba(12, 20, 45, 0.06);
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-primary, #0b1220);
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.moodButton:hover {
+  transform: translateY(-2px);
+}
+
+.moodButtonActive {
+  background: linear-gradient(90deg, var(--secondary-color), var(--star-glow, #F3D76B));
+  color: var(--primary-dark);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  border: none;
+}
+
+.slider {
+  width: 100%;
+  accent-color: var(--secondary-color, #6c5ce7);
+}
+
+.tagsInput {
+  display: block;
+}
+
+@media (min-width: 1200px) {
+  .editDreamForm {
+    width: 900px;
+  }
+}
+
+@media (max-width: 520px) {
+  .editDreamForm {
+    padding: 16px;
+    margin: 12px;
+  }
+
+  .title {
+    font-size: 1.05rem;
+  }
+
+  .moodButton {
+    padding: 8px 10px;
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.massage {
+  color: var(--text-primary);
+  font-weight: 100;
+}
+
+.tagsContainer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.tagItem {
+  background: var(--star-shimmer, rgba(243, 215, 107));
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tagItem:hover {
+  background: var(--star-shimmer, rgba(243, 215, 107, 0.2));
+}

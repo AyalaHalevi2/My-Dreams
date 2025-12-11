@@ -48,8 +48,8 @@ export const getDreamById = async (req: AuthRequest, res: Response): Promise<voi
     }
 
     if (!mongoose.Types.ObjectId.isValid(dreamId)) {
-        res.status(400).json({ success: false, message: 'Invalid dream ID format' });
-        return;
+      res.status(400).json({ success: false, message: 'Invalid dream ID format' });
+      return;
     }
 
     // Find dream by ID and ensure it belongs to the authenticated user
@@ -83,7 +83,7 @@ export const createDream = async (req: AuthRequest, res: Response): Promise<void
     if (!userId) {
       res.status(401).json({ success: false, message: 'User not authenticated' });
       throw new Error('User not authenticated');
-      
+
     }
 
     if (!title || !content) {
@@ -110,8 +110,8 @@ export const createDream = async (req: AuthRequest, res: Response): Promise<void
     console.error('Create Dream Error:', error);
     // Handle validation errors (e.g., clarity out of range)
     if (error.name === 'ValidationError') {
-        res.status(400).json({ success: false, message: error.message });
-        return;
+      res.status(400).json({ success: false, message: error.message });
+      return;
     }
     res.status(500).json({ success: false, message: 'Failed to create dream' });
   }
@@ -126,21 +126,21 @@ export const updateDream = async (req: AuthRequest, res: Response): Promise<void
   try {
     const userId = req.user?._id;
     const dreamId = req.params.id;
-    const updateData = req.body;
-
+    const updateData = req.body.dream;
+    console.log(updateData);
     if (!userId) {
       res.status(401).json({ success: false, message: 'User not authenticated' });
       return;
     }
 
     if (!mongoose.Types.ObjectId.isValid(dreamId)) {
-        res.status(400).json({ success: false, message: 'Invalid dream ID format' });
-        return;
+      res.status(400).json({ success: false, message: 'Invalid dream ID format' });
+      return;
     }
 
     // Prevent user from changing the userId
     if (updateData.userId) {
-        delete updateData.userId;
+      delete updateData.userId;
     }
     // Update the updatedAt field
     updateData.updatedAt = new Date();
@@ -158,13 +158,14 @@ export const updateDream = async (req: AuthRequest, res: Response): Promise<void
 
     res.status(200).json({
       success: true,
+      message: 'udpaded dream successfully',
       dream,
     });
   } catch (error: any) {
     console.error('Update Dream Error:', error);
     if (error.name === 'ValidationError') {
-        res.status(400).json({ success: false, message: error.message });
-        return;
+      res.status(400).json({ success: false, message: error.message });
+      return;
     }
     res.status(500).json({ success: false, message: 'Failed to update dream' });
   }
@@ -186,8 +187,8 @@ export const deleteDream = async (req: AuthRequest, res: Response): Promise<void
     }
 
     if (!mongoose.Types.ObjectId.isValid(dreamId)) {
-        res.status(400).json({ success: false, message: 'Invalid dream ID format' });
-        return;
+      res.status(400).json({ success: false, message: 'Invalid dream ID format' });
+      return;
     }
 
     const dream = await Dream.findOneAndDelete({ _id: dreamId, userId });
@@ -224,8 +225,8 @@ export const toggleFavorite = async (req: AuthRequest, res: Response): Promise<v
     }
 
     if (!mongoose.Types.ObjectId.isValid(dreamId)) {
-        res.status(400).json({ success: false, message: 'Invalid dream ID format' });
-        return;
+      res.status(400).json({ success: false, message: 'Invalid dream ID format' });
+      return;
     }
 
     const dream = await Dream.findOne({ _id: dreamId, userId });
@@ -318,107 +319,109 @@ export const getUniqueTags = async (req: AuthRequest, res: Response): Promise<vo
  * @access Private
  */
 export const getDreamStatistics = async (req: AuthRequest, res: Response): Promise<void> => {
-    try {
-        const userId = req.user?._id;
+  try {
+    const userId = req.user?._id;
 
-        if (!userId) {
-            res.status(401).json({ success: false, message: 'User not authenticated' });
-            return;
-        }
-
-        const userObjectId = new mongoose.Types.ObjectId(userId);
-
-        // 1. Total Dreams and Dreams This Month
-        const totalDreamsPromise = Dream.countDocuments({ userId: userObjectId });
-
-        const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-        const dreamsThisMonthPromise = Dream.countDocuments({
-            userId: userObjectId,
-            date: { $gte: startOfMonth }
-        });
-
-        // 2. Average Clarity
-        const avgClarityPipeline: PipelineStage[] = [
-            { $match: { userId: userObjectId, clarity: { $exists: true } } },
-            { $group: { _id: null, averageClarity: { $avg: '$clarity' } } }
-        ];
-        const avgClarityPromise = Dream.aggregate(avgClarityPipeline);
-
-        // 3. Top Tags
-        const topTagsPipeline: PipelineStage[] = [
-            { $match: { userId: userObjectId, tags: { $exists: true, $ne: [] } } },
-            { $unwind: '$tags' },
-            { $group: { _id: '$tags', count: { $sum: 1 } } },
-            { $sort: { count: -1 } },
-            { $limit: 5 }, // Top 5 tags
-            { $project: { _id: 0, tag: '$_id', count: 1 } }
-        ];
-        const topTagsPromise = Dream.aggregate(topTagsPipeline);
-
-        // 4. Mood Distribution
-        const moodDistributionPipeline: PipelineStage[] = [
-            { $match: { userId: userObjectId, mood: { $exists: true } } },
-            { $group: { _id: '$mood', count: { $sum: 1 } } },
-            { $project: { _id: 0, mood: '$_id', count: 1 } }
-        ];
-        const moodDistributionPromise = Dream.aggregate(moodDistributionPipeline);
-
-        // 5. Dreams by Month (last 6 months)
-        const dateLimit = new Date();
-        dateLimit.setMonth(dateLimit.getMonth() - 6);
-
-        const dreamsByMonthPipeline: PipelineStage[] = [
-            { $match: { userId: userObjectId, date: { $gte: dateLimit } } },
-            { $group: {
-                _id: { $dateToString: { format: '%Y-%m', date: '$date' } },
-                count: { $sum: 1 }
-            } },
-            { $sort: { _id: 1 } },
-            { $project: { _id: 0, month: '$_id', count: 1 } }
-        ];
-        const dreamsByMonthPromise = Dream.aggregate(dreamsByMonthPipeline);
-
-        // Execute all promises concurrently
-        const [
-            totalDreams,
-            dreamsThisMonth,
-            avgClarityResult,
-            topTags,
-            moodDistributionRaw,
-            dreamsByMonth
-        ] = await Promise.all([
-            totalDreamsPromise,
-            dreamsThisMonthPromise,
-            avgClarityPromise,
-            topTagsPromise,
-            moodDistributionPromise,
-            dreamsByMonthPromise
-        ]);
-
-        const averageClarity = avgClarityResult.length > 0
-            ? parseFloat(avgClarityResult[0].averageClarity.toFixed(2))
-            : 0;
-
-        const moodDistribution = moodDistributionRaw.reduce((acc: { [key: string]: number }, item) => {
-            acc[item.mood] = item.count;
-            return acc;
-        }, {});
-
-        res.status(200).json({
-            success: true,
-            statistics: {
-                totalDreams,
-                dreamsThisMonth,
-                averageClarity,
-                topTags,
-                moodDistribution,
-                dreamsByMonth
-            }
-        });
-    } catch (error: any) {
-        console.error('Get Dream Statistics Error:', error);
-        res.status(500).json({ success: false, message: 'Failed to fetch dream statistics' });
+    if (!userId) {
+      res.status(401).json({ success: false, message: 'User not authenticated' });
+      return;
     }
+
+    const userObjectId = new mongoose.Types.ObjectId(userId);
+
+    // 1. Total Dreams and Dreams This Month
+    const totalDreamsPromise = Dream.countDocuments({ userId: userObjectId });
+
+    const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    const dreamsThisMonthPromise = Dream.countDocuments({
+      userId: userObjectId,
+      date: { $gte: startOfMonth }
+    });
+
+    // 2. Average Clarity
+    const avgClarityPipeline: PipelineStage[] = [
+      { $match: { userId: userObjectId, clarity: { $exists: true } } },
+      { $group: { _id: null, averageClarity: { $avg: '$clarity' } } }
+    ];
+    const avgClarityPromise = Dream.aggregate(avgClarityPipeline);
+
+    // 3. Top Tags
+    const topTagsPipeline: PipelineStage[] = [
+      { $match: { userId: userObjectId, tags: { $exists: true, $ne: [] } } },
+      { $unwind: '$tags' },
+      { $group: { _id: '$tags', count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+      { $limit: 5 }, // Top 5 tags
+      { $project: { _id: 0, tag: '$_id', count: 1 } }
+    ];
+    const topTagsPromise = Dream.aggregate(topTagsPipeline);
+
+    // 4. Mood Distribution
+    const moodDistributionPipeline: PipelineStage[] = [
+      { $match: { userId: userObjectId, mood: { $exists: true } } },
+      { $group: { _id: '$mood', count: { $sum: 1 } } },
+      { $project: { _id: 0, mood: '$_id', count: 1 } }
+    ];
+    const moodDistributionPromise = Dream.aggregate(moodDistributionPipeline);
+
+    // 5. Dreams by Month (last 6 months)
+    const dateLimit = new Date();
+    dateLimit.setMonth(dateLimit.getMonth() - 6);
+
+    const dreamsByMonthPipeline: PipelineStage[] = [
+      { $match: { userId: userObjectId, date: { $gte: dateLimit } } },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m', date: '$date' } },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { _id: 1 } },
+      { $project: { _id: 0, month: '$_id', count: 1 } }
+    ];
+    const dreamsByMonthPromise = Dream.aggregate(dreamsByMonthPipeline);
+
+    // Execute all promises concurrently
+    const [
+      totalDreams,
+      dreamsThisMonth,
+      avgClarityResult,
+      topTags,
+      moodDistributionRaw,
+      dreamsByMonth
+    ] = await Promise.all([
+      totalDreamsPromise,
+      dreamsThisMonthPromise,
+      avgClarityPromise,
+      topTagsPromise,
+      moodDistributionPromise,
+      dreamsByMonthPromise
+    ]);
+
+    const averageClarity = avgClarityResult.length > 0
+      ? parseFloat(avgClarityResult[0].averageClarity.toFixed(2))
+      : 0;
+
+    const moodDistribution = moodDistributionRaw.reduce((acc: { [key: string]: number }, item) => {
+      acc[item.mood] = item.count;
+      return acc;
+    }, {});
+
+    res.status(200).json({
+      success: true,
+      statistics: {
+        totalDreams,
+        dreamsThisMonth,
+        averageClarity,
+        topTags,
+        moodDistribution,
+        dreamsByMonth
+      }
+    });
+  } catch (error: any) {
+    console.error('Get Dream Statistics Error:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch dream statistics' });
+  }
 };
 
 /**
@@ -454,7 +457,7 @@ export const searchDreams = async (req: AuthRequest, res: Response): Promise<voi
 
     // Filter by mood
     if (mood && typeof mood === 'string') {
-        query.mood = mood;
+      query.mood = mood;
     }
 
     // Filter by date range

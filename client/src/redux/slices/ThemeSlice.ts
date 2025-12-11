@@ -6,7 +6,7 @@ export interface ThemeState {
 
 const getInitialTheme = (): 'light' | 'dark' => {
     const saved = localStorage.getItem('theme');
-    return (saved === 'light' || saved === 'dark' ? saved : 'light');
+    return (saved === 'light' || saved === 'dark' ? saved : 'dark');
 };
 const initialState: ThemeState = {
     theme: getInitialTheme(),
